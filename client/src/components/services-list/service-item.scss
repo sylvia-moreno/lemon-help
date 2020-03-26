@@ -1,0 +1,28 @@
+.services-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+
+    &--content {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &--icon svg{
+        margin-right: 10px;
+    }
+
+    &--checked {
+        border-color: #FD6464;
+        .list-service-item {
+            &--icon {
+                color: #FD6464;
+            }
+
+            &--icon-label {
+                color: #FD6464;
+            }
+        }
+    }
+}

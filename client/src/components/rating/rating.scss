@@ -1,0 +1,19 @@
+.rating {
+    display: flex;
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+    margin: 5px 0;
+    svg {
+        width: 15px !important;
+        height: 15px;
+    }
+}
+
+.full {
+    color: #FFAC66;
+}
+
+.empty {
+    color: #F5F3F2;
+}
