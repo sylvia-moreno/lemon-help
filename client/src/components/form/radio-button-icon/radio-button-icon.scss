@@ -1,0 +1,36 @@
+.radio-button-icon {
+  display: flex;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 130px;
+  justify-content: center;
+
+  &--checked {
+    border: 1px solid #fd6464;
+    .radio-button-icon
+    {
+        &--icon,
+        &--label {
+            color: #fd6464;
+        }
+    }
+  }
+
+  &--icon {
+    margin-right: 8px;
+  }
+
+  &--input {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+}

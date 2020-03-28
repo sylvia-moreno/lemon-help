@@ -20,6 +20,22 @@ export default {
         response.data
       )
   },
+
+  /*getSpecificMaid(
+    foodPreference, 
+    numberOfClient,
+    foodType,
+    mealType
+    ) {
+    return this.service.post('/cooking-service', {
+      foodPreference, 
+      numberOfClient,
+      foodType,
+      mealType
+    })
+    .then(response => response.data)
+  },*/
+
   /*loggedin() {
     return this.service.get('/loggedin')
       .then(response => response.data)

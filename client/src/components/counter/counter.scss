@@ -1,0 +1,37 @@
+.counter {
+  display: flex;
+  justify-content: space-between;
+  padding: 23px 0;
+  border-bottom: 1px solid #cccccc59;
+
+  &-btn {
+    &--elt {
+      background: none;
+      width: 42px;
+      height: 29px;
+      border-color: #fff;
+      background: #ffaa63;
+      &:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      &:last-child {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      &:disabled {
+        background: #ccc;
+      }
+
+      &-is-click {
+        background: #fd6464;
+        //border-radius: 10px;
+      }
+    }
+
+    &--symbol {
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+}

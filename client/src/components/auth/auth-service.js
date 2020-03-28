@@ -9,6 +9,7 @@ export default {
   }),
 
   login(username, password) {
+    debugger
     return this.service.post('/login', {username, password})
       .then(response => response.data)
   },

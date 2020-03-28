@@ -7,6 +7,7 @@ import Homepage from './components/auth/Homepage.js'
 import Signup from './components/auth/Signup.js';
 import Login from './components/auth/Login.js';
 import Profile from './components/auth/Profile.js';
+import FormCookingService from './components/form/form-service/form-cooking-service';
 
 import RatedProfil from './components/rated-profil/rated-profil';
 import LandingPage from './components/landing-page/landing-page';
@@ -17,7 +18,14 @@ import maidService from './services/maids';
 class App extends Component {
   state = {
     user: {} ,
-    //maids: {}
+    maids: {}
+  }
+
+  componentDidMount() {
+    maidService.getMaid()
+      .then(data => this.setState({maids: data}))
+      .catch(err => this.setState({user: {}}))
+      ;
   }
 
   fetchUser = () => {
@@ -46,7 +54,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" render={(props) => (
-              <Homepage user={this.state.user} maids={this.state.maids} updateMaid={this.updateMaid} />
+              <Homepage user={this.state.user} history={props.history} />
             )} />
 
             <Route exact path="/signup" render={(props) => (
@@ -62,7 +70,11 @@ class App extends Component {
             )} />
 
             <Route exact path="/landing-page" render={(props) => (
-              <LandingPage user={this.state.user} maids={this.state.maids} history={props.history} updateUser={this.updateUser} updateMaid={this.updateMaid}/>
+              <LandingPage history={props.history} updateUser={this.updateUser} updateMaid={this.updateMaid}/>
+            )} />
+
+            <Route exact path="/cooking-service" render={(props) => (
+              <FormCookingService />
             )} />
 
             {/* last route, ie: 404 */}

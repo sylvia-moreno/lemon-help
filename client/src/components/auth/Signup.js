@@ -13,7 +13,7 @@ export default class extends React.Component {
     cityName: "",
     cityCode: "",
     country: "",
-    gender: "",
+    //gender: "",
 
     error: ""
   }
@@ -27,8 +27,17 @@ export default class extends React.Component {
         this.setState({error: ""});
 
         // 2. then, update with user infos
-        authService.edit(this.state.username, this.state.campus, this.state.course)
+        authService.edit(
+          this.state.username, 
+          this.state.password, 
+          this.state.email, 
+          this.state.cityName, 
+          this.state.cityCode, 
+          this.state.country, 
+          //this.state.gender, 
+          )
           .then(response => {
+            debugger
             this.setState({error: ""});
             
             this.props.updateUser(response);
@@ -113,16 +122,7 @@ export default class extends React.Component {
               </label>
             </p>
 
-            <p>
-              <label>
-                <em>Sexe</em>
-                <select name="sexe" value={this.state.sexe} onChange={this.handleChange}>
-                  <option value="Femme">Femme</option>
-                  <option value="Homme">Homme</option>
-                </select>
-              </label>
-            </p>
-
+            
           </form>
 
           <p>

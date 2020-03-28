@@ -14,13 +14,16 @@ const icons = {
     BABYSITTING: faBaby,
 }
 
-const ServiceItem = ({serviceValue, serviceName}) => {
+const ServiceItem = ({serviceValue, serviceName, hasChecked}) => {
     
     const [isChecked, setIsChecked] = useState(false);
-
+    
     const handledChange = useCallback(
         e => {
-            return e.target.checked ? setIsChecked(true) : setIsChecked(false);
+            if(e.target.checked) {
+                e.target.checked ? setIsChecked(true) : setIsChecked(false);
+                hasChecked(e.target.checked, serviceValue);
+            }
         },
         []
     );
