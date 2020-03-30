@@ -10,6 +10,7 @@ import Profile from "./components/auth/Profile.js";
 import FormCookingService from "./components/form/form-service/form-cooking-service";
 
 import Booking from "./components/booking/booking";
+import BookingConfirmation from "./components/booking/booking-confirmation";
 import LandingPage from "./components/landing-page/landing-page";
 
 import authService from "./components/auth/auth-service.js";
@@ -19,7 +20,8 @@ class App extends Component {
   state = {
     user: {},
     maids: [],
-    preferencesUserService: {},
+    selectedService: {},
+    selectedMaid: {}
   };
 
   componentDidMount() {
@@ -48,10 +50,15 @@ class App extends Component {
     this.setState({ maids: data });
   };
 
-  savePreferencesService = data => {
-    debugger
-    this.setState({ preferencesUserService: data });
-  }
+  updateSelectedService = data => {
+    debugger;
+    this.setState({ selectedService: data });
+  };
+
+  updateSelectedMaid = data => {
+    debugger;
+    this.setState({ selectedMaid: data });
+  };
 
   componentDidMount() {
     this.fetchUser();
@@ -123,7 +130,7 @@ class App extends Component {
                   <FormCookingService
                     history={props.history}
                     updateMaid={this.updateMaidsDisplayForServiceSelected}
-                    savePreferencesService={this.savePreferencesService}
+                    selectedService={this.updateSelectedService}
                   />
                 )}
               />
@@ -135,7 +142,20 @@ class App extends Component {
                   <Booking
                     history={props.history}
                     maids={this.state.maids}
-                    preferencesUserService={this.state.preferencesUserService}
+                    selectedService={this.state.selectedService}
+                    selectedMaid={this.updateSelectedMaid}
+                  />
+                )}
+              />
+
+              <Route
+                exact
+                path="/booking-confirmation"
+                render={props => (
+                  <BookingConfirmation
+                    history={props.history}
+                    selectedService={this.state.selectedService}
+                    selectedMaid={this.state.selectedMaid}
                   />
                 )}
               />

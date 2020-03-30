@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   service: axios.create({
@@ -6,11 +6,12 @@ export default {
     withCredentials: true
   }),
 
-  //get all services
-  getServices() {
-    return this.service.get('/')
-      .then(response => 
-        response.data
-      )
-  },
-}  
+  bookingCookingService() {
+    debugger
+    return this.service
+      .post("/booking-confirmation", {
+
+      })
+      .then(response => response.data);
+  }
+};

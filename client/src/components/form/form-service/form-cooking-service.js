@@ -1,4 +1,14 @@
-import React, { useEffect, useState, useCallBack } from "react";
+import React, { useState } from "react";
+
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import { fr } from "date-fns/locale";
+
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 
 import { faCarrot } from "@fortawesome/free-solid-svg-icons";
 import { faDrumstickBite } from "@fortawesome/free-solid-svg-icons";
@@ -8,45 +18,46 @@ import maidService from "../../../services/maids";
 
 import RadioButtonIcon from "../radio-button-icon/radio-button-icon";
 import Counter from "../../counter/counter";
-import Accordion from "../../accordion/accordion";
 
 import "./form.scss";
 
-const FormCookingService = ({history, updateMaid, savePreferencesService}) => {
+const FormCookingService = ({
+  history,
+  updateMaid,
+  selectedService
+}) => {
   const [foodPreference, setFoodPreference] = useState("");
   const [numberOfClient, setNumberOfClient] = useState(1);
   const [foodType, setFoodType] = useState("");
   const [mealType, setMealType] = useState("");
   const [maids, setMaids] = useState({});
-
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [locale, setLocale] = useState("fr");
 
   const serviceType = "cuisine";
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    
+
     //je vais rechercher les maids qui correspondent à ma recherche
-    maidService.getSpecificMaid(
-      foodType,
-      foodPreference,
-      mealType,
-      serviceType,
-    )
+    maidService
+      .getSpecificMaid(foodType, foodPreference, mealType, serviceType)
       .then(data => {
-        const preferencesUser = {foodType, foodPreference, mealType, serviceType, numberOfClient};        setMaids(data)
+        const preferencesUser = {
+          foodType,
+          foodPreference,
+          mealType,
+          serviceType,
+          numberOfClient,
+          selectedDate
+        };
+        setMaids(data);
         updateMaid(data);
-        savePreferencesService(preferencesUser);
-        history.push('/booking');
+        selectedService(preferencesUser);
+        history.push("/booking");
       })
-      .catch(err => err)
-    ;
-    
-    //je vais poster toutes mes info à /maids-proposed
-    //qui va me retourner la liste des maids qui correspondent
-    
-    // il va falloir stocker les renseignements de mon form
-    //pour pouvoir les afficher après avoir choisi un maid pour le récap
-  }
+      .catch(err => err);
+  };
 
   const handleChangeFoodPreference = e => {
     const val = e.target.value;
@@ -54,7 +65,6 @@ const FormCookingService = ({history, updateMaid, savePreferencesService}) => {
   };
 
   const handleChangeNumberOfClient = nb => {
-    debugger
     setNumberOfClient(nb);
   };
 
@@ -68,6 +78,9 @@ const FormCookingService = ({history, updateMaid, savePreferencesService}) => {
     setMealType(val);
   };
 
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
 
   return (
     <form className="form-service form-cooking" onSubmit={handleSubmit}>
@@ -227,7 +240,41 @@ const FormCookingService = ({history, updateMaid, savePreferencesService}) => {
         </div>
       </fieldset>
 
-      <button className="btn-cta" onClick={handleSubmit}>Rechercher</button>
+      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={fr}>
+        <div className="form-cooking--group">
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="dd/MM/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Date :"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+        </div>
+
+        <div className="form-cooking--group">
+          <KeyboardTimePicker
+            margin="normal"
+            id="time-picker"
+            label="Horaire :"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change time"
+            }}
+            locale={fr}
+          />
+        </div>
+      </MuiPickersUtilsProvider>
+
+      <button className="btn-cta" onClick={handleSubmit}>
+        Rechercher
+      </button>
     </form>
   );
 };
