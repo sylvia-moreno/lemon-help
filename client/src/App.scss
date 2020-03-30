@@ -8,13 +8,15 @@ $FONT2: 'Nunito Sans', sans-serif;
 body {
   font-family: $FONT2;
   font-weight: 300;
+  font-size: 90%;
 }
 
 .App {
-  min-height:100vh;
+  //min-height:100vh;
   display:flex; 
   align-items:center; 
   justify-content:center;
+  margin: 20px;
 }
 
 input,
@@ -82,6 +84,9 @@ h1 {color:#648166;}
   text-transform: uppercase;
   text-decoration: none;
   margin: 5px 0;
+  width: 100%;
+  border: none;
+  margin: 30px 0;
   &:hover {
     background: #ffb79e;
   }

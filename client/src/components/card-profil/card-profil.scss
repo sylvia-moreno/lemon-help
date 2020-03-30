@@ -1,0 +1,76 @@
+.card-profil {
+  display: flex;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  &--img {
+    position: relative;
+    width: 150px;
+    border-radius: 9px;
+
+    &-container {
+      overflow: hidden;
+      height: 100px;
+      display: block;
+      border-radius: 5px;
+      position: relative;
+      width: 150px;
+      img {
+        width: 150px;
+        position: absolute;
+        background-size: contain;
+      }
+    }
+  }
+
+  &--info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 12px;
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      p {
+        margin: 0;
+      }
+      &-name {
+        font-family: "Nunito", sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        margin-top: 0;
+        font-size: 18px;
+      }
+      &-service {
+        color: #9c9b9b;
+      }
+
+      &-cta {
+        display: flex;
+        
+        &-show-profil,
+        &-selected {
+          font-size: 60%;
+          width: 150px;
+          padding: 9px;
+          margin-bottom: 0;
+        }
+        &-show-profil {
+          background: none;
+          border: 1px solid #fd6464;
+        }
+      }
+      
+
+      .rating {
+        &-number,
+        svg {
+          color: #f7b249;
+        }
+      }
+    }
+  }
+}

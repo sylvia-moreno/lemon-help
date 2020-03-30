@@ -4,24 +4,21 @@ const Schema   = mongoose.Schema;
 const cookingSchema = new Schema({
   name: String,
   price: String,
-  type: {
+  foodType: {
     type: String,
-    enum: ['français', 'indien', 'italien', 'libanais', 'vététarien']
+    enum: ['français', 'indien', 'italien', 'libanais', 'américain']
   },
   hasDiscount: String,
   date: String,
-  /*mealType: {
+  mealType: {
     type: String,
     enum: ['petit déjeune', 'déjeune', 'goûté', 'dîner']
-  },*/
+  },
   duration: {
     type: String,
     enum: ['30 min', '1 heure', '2 heures', '>2 heures']
   },
-  /*foodPreference: {
-    type: String,
-    enum: ['végétarien', 'peut-importe', 'non végétarien']
-  },*/
+  foodPreference: String,
   numberOfClient: String,
 }, {
   timestamps: {

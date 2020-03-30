@@ -78,7 +78,7 @@ router.post("/signup", (req, res, next) => {
       });
     })
     .catch(err => {
-      res.status(500).json({message: "Something went wrong"});
+      res.status(500).json({message: "Something went wrong: ", err});
     })
   });
 });

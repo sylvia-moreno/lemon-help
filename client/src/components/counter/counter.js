@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 
 import './counter.scss';
 
-const Counter = props => {
+const Counter = (props) => {
   const [count, setCount] = useState(1);
   const [isBtnIncClick, setIsBtnIncClick] = useState(false);
   const [isBtnDecClick, setIsBtnDecClick] = useState(false);
@@ -14,25 +14,27 @@ const Counter = props => {
     BABYSITTING: "enfant(s) à garder"
   };
 
+  
+
   const decrementCount = e => {
     e.preventDefault();
     setCount(count - 1);
+    props.countNumberOfClient(count);
     setIsBtnDecClick(true);
     setIsBtnIncClick(false);
-
   };
   const incrementCount = e => {
     e.preventDefault();
     setCount(count + 1);
+    props.countNumberOfClient(count);
     setIsBtnIncClick(true);
     setIsBtnDecClick(false);
-
   };
 
   return (
     <div className="counter">
       <span className="counter-label">
-        {count} {label[props.serviceType]}
+        <span className="counter-number">{count}</span> {label[props.serviceType]}
       </span>
       <div className="counter-btn">
         <button

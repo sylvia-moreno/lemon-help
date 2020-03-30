@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
+const Dish = require('./Dish');
+
 const maidSchema = new Schema({
   username: String,
   password: String,
@@ -16,7 +18,9 @@ const maidSchema = new Schema({
   badge: String,
   gender: String,  
   profession: String,
-
+  speciality: Array,
+  foodPractice: Array,
+  listsOfDishs: Array,
   services: Array,
   requirements :String,
   curriculumvitae: String,

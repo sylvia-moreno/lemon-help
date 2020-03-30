@@ -1,44 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallBack } from "react";
 
 import { faCarrot } from "@fortawesome/free-solid-svg-icons";
 import { faDrumstickBite } from "@fortawesome/free-solid-svg-icons";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 
+import maidService from "../../../services/maids";
+
 import RadioButtonIcon from "../radio-button-icon/radio-button-icon";
-import Counter from "../../counter/counter"
+import Counter from "../../counter/counter";
+import Accordion from "../../accordion/accordion";
 
 import "./form.scss";
 
-const FormCookingService = () => {
+const FormCookingService = ({history, updateMaid, savePreferencesService}) => {
   const [foodPreference, setFoodPreference] = useState("");
-  const [numberOfClient, setNumberOfClient] = useState("");
+  const [numberOfClient, setNumberOfClient] = useState(1);
   const [foodType, setFoodType] = useState("");
   const [mealType, setMealType] = useState("");
+  const [maids, setMaids] = useState({});
 
-  /*const handleSubmit = (event) => {
+
+  const serviceType = "cuisine";
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     
-    //je vais rechercher les helpers qui correspondent à ma recherche
-    /*maidService.getSpecificMaid()
-    .then(data => setMaids(data))
-    .catch(err => setMaids({}))
+    //je vais rechercher les maids qui correspondent à ma recherche
+    maidService.getSpecificMaid(
+      foodType,
+      foodPreference,
+      mealType,
+      serviceType,
+    )
+      .then(data => {
+        const preferencesUser = {foodType, foodPreference, mealType, serviceType, numberOfClient};        setMaids(data)
+        updateMaid(data);
+        savePreferencesService(preferencesUser);
+        history.push('/booking');
+      })
+      .catch(err => err)
     ;
     
     //je vais poster toutes mes info à /maids-proposed
-    qui va me retourner la liste des maids qui correspondent
+    //qui va me retourner la liste des maids qui correspondent
     
     // il va falloir stocker les renseignements de mon form
-    pour pouvoir les afficher après avoir choisi un maid pour le récap
-  }*/
+    //pour pouvoir les afficher après avoir choisi un maid pour le récap
+  }
 
   const handleChangeFoodPreference = e => {
     const val = e.target.value;
     setFoodPreference(val);
   };
 
-  const handleChangeNumberOfClient = e => {
-    const val = e.target.value;
-    setNumberOfClient(val);
+  const handleChangeNumberOfClient = nb => {
+    debugger
+    setNumberOfClient(nb);
   };
 
   const handleChangeFoodType = e => {
@@ -51,165 +68,166 @@ const FormCookingService = () => {
     setMealType(val);
   };
 
+
   return (
-    <form className="form-cooking">
+    <form className="form-service form-cooking" onSubmit={handleSubmit}>
       <fieldset>
         <legend>Pratique alimentaire :</legend>
         <div className="form-cooking--group form-cooking--group-radio-button">
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
-            isSelected={foodPreference === "vegan"}
+            isSelected={foodPreference === "végétarien"}
             label="Végétarien"
-            value="vegan"
-            name="vegan"
+            value="végétarien"
+            name="végétarien"
             icon={faCarrot}
           />
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
-            isSelected={foodPreference === "notVegan"}
+            isSelected={foodPreference === "carnivore"}
             label="Carnivore"
-            value="notVegan"
-            name="notVegan"
+            value="carnivore"
+            name="carnivore"
             icon={faDrumstickBite}
           />
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
-            isSelected={foodPreference === "anyFood"}
+            isSelected={foodPreference === "tousAliments"}
             label="De tout"
-            value="anyFood"
-            name="anyFood"
+            value="tousAliments"
+            name="tousAliments"
             icon={faUtensils}
           />
         </div>
       </fieldset>
 
+      <Counter
+        serviceType={"COOKING"}
+        countNumberOfClient={handleChangeNumberOfClient}
+      />
 
-      <Counter serviceType={"COOKING"} />
-
-      <div className="form-cooking--group">
-        <label>
-          Combien serez-vous pour le repas ?
-          <input
-            type="number"
-            name="numberOfClient"
-            min="1"
-            max="10"
-            value={numberOfClient}
-            onChange={handleChangeNumberOfClient}
-          />
-        </label>
-      </div>
-
-      <div className="form-cooking--group">
-        <fieldset>
+      <fieldset>
+        <div className="form-cooking--group form-type">
           <legend>Cuisine :</legend>
+          <div className="form-type--radio-group">
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="français"
+                value="français"
+                checked={foodType === "français"}
+                onChange={handleChangeFoodType}
+              />
+              Français
+              <div className="radio-btn--check"></div>
+            </label>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="frenchFood"
-              value="frenchFood"
-              checked={foodType === "frenchFood"}
-              onChange={handleChangeFoodType}
-            />
-            Français
-          </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="indien"
+                value="indien"
+                checked={foodType === "indien"}
+                onChange={handleChangeFoodType}
+              />
+              Indien
+              <div className="radio-btn--check"></div>
+            </label>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="indianFood"
-              value="indianFood"
-              checked={foodType === "indianFood"}
-              onChange={handleChangeFoodType}
-            />
-            Indien
-          </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="américain"
+                value="américain"
+                checked={foodType === "américain"}
+                onChange={handleChangeFoodType}
+              />
+              Americain - Burger
+              <div className="radio-btn--check"></div>
+            </label>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="americanFood"
-              value="americanFood"
-              checked={foodType === "americanFood"}
-              onChange={handleChangeFoodType}
-            />
-            Americain - Burger
-          </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="italien"
+                value="italien"
+                checked={foodType === "italien"}
+                onChange={handleChangeFoodType}
+              />
+              Italien
+              <div className="radio-btn--check"></div>
+            </label>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="italianFood"
-              value="italianFood"
-              checked={foodType === "italianFood"}
-              onChange={handleChangeFoodType}
-            />
-            Italien
-          </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="libanais"
+                value="libanais"
+                checked={foodType === "libanais"}
+                onChange={handleChangeFoodType}
+              />
+              Libanais
+              <div className="radio-btn--check"></div>
+            </label>
+          </div>
+        </div>
+      </fieldset>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="libaneaseFood"
-              value="libaneaseFood"
-              checked={foodType === "libaneaseFood"}
-              onChange={handleChangeFoodType}
-            />
-            Libanais
-          </label>
-        </fieldset>
-      </div>
-
-      <div className="form-cooking--group">
-        <fieldset>
+      <fieldset>
+        <div className="form-cooking--group form-type">
           <legend>Repas :</legend>
+          <div className="form-type--radio-group">
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="petit-déjeuné"
+                value="petit-déjeuné"
+                checked={mealType === "petit-déjeuné"}
+                onChange={handleChangeMealType}
+              />
+              Petit déjeuné
+              <div className="radio-btn--check"></div>
+            </label>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="breakfast"
-              value="breakfast"
-              checked={mealType === "breakfast"}
-              onChange={handleChangeMealType}
-            />
-            Petit déjeuné
-          </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="déjeuné"
+                value="déjeuné"
+                checked={mealType === "déjeuné"}
+                onChange={handleChangeMealType}
+              />
+              Déjeuné
+              <div className="radio-btn--check"></div>
+            </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="goûter"
+                value="goûter"
+                checked={mealType === "goûter"}
+                onChange={handleChangeMealType}
+              />
+              Goûter
+              <div className="radio-btn--check"></div>
+            </label>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="lunch"
-              value="lunch"
-              checked={mealType === "lunch"}
-              onChange={handleChangeMealType}
-            />
-            Déjeuné
-          </label>
-          <label className="radio">
-            <input
-              type="radio"
-              name="snack"
-              value="snack"
-              checked={mealType === "snack"}
-              onChange={handleChangeMealType}
-            />
-            Goûter
-          </label>
+            <label className="radio-btn">
+              <input
+                type="radio"
+                name="diner"
+                value="diner"
+                checked={mealType === "diner"}
+                onChange={handleChangeMealType}
+              />
+              Dîner
+              <div className="radio-btn--check"></div>
+            </label>
+          </div>
+        </div>
+      </fieldset>
 
-          <label className="radio">
-            <input
-              type="radio"
-              name="diner"
-              value="diner"
-              checked={mealType === "diner"}
-              onChange={handleChangeMealType}
-            />
-            Dîner
-          </label>
-        </fieldset>
-      </div>
-      <button className="btn-cta">Rechercher</button>
+      <button className="btn-cta" onClick={handleSubmit}>Rechercher</button>
     </form>
   );
 };

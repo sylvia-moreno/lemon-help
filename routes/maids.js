@@ -33,6 +33,7 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
+  debugger
   const email = req.body.email;
   const password = req.body.password;
   const username = req.body.username;
@@ -47,6 +48,9 @@ router.post("/signup", (req, res, next) => {
   const gender = req.body.gender;   
   const services = req.body.services;   
   const curriculumvitae = req.body.curriculumvitae;   
+  const foodPractice = req.body.foodPractice;   
+  const speciality = req.body.speciality;   
+  const listsOfDishs = req.body.listsOfDishs;   
    
 
   if (!email || !password) {
@@ -78,10 +82,14 @@ router.post("/signup", (req, res, next) => {
       gender,
       services,
       curriculumvitae,
+      foodPractice,
+      speciality,
+      listsOfDishs,
     });
 
     newMaid.save()
     .then(() => {
+      debugger
       req.login(newMaid, (err) => {
         if (err) {
           res.status(500).json({message: 'Login after signup went bad.'});
@@ -111,20 +119,19 @@ router.get("/logout", (req, res) => {
   res.status(403).json({message: 'Unauthorized'});
 });*/
 
-router.get("/", async (req, res, next) => {
-  
-  await Maid
-    .find()
-    .then(maids => {
+router.get("/", (req, res, next) => {
+
+  Maid
+    .find().then(maids => {
       res.status(201).json(maids);
     })
     .catch(err => {
       res
         .status(500)
-        .json({ message: "Something went wrong during maids request" });
+        .json({ message: "Something went wrong during maids request. See errors :", err });
     });
   
-    res.status(403).json({message: 'toto'});
+    //res.status(403).json({message: 'Maids are not find'});
 });
 
 
@@ -160,6 +167,29 @@ router.post("/edit", (req, res, next) => {
       res.status(200).json(req.Maid);
     })
   });
+});
+
+router.post("/cooking-service", (req, res, next) => {
+  debugger
+  const foodType = req.body.foodType;
+  const foodPreference = req.body.foodPreference
+  const mealType = req.body.mealType;
+  const serviceType = req.body.serviceType;
+
+  Maid.find({
+    speciality: foodType,
+    foodPractice: foodPreference,
+    'listsOfDishs.type': mealType,
+    services: serviceType,
+  })
+    .then(maidsList => {
+      res.status(201).json(maidsList);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: "Something went wrong during maids request", err });
+    });
 });
 
 module.exports = router;

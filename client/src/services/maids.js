@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   service: axios.create({
@@ -7,34 +7,29 @@ export default {
   }),
 
   signup(email, password) {
-    return this.service.post('/signup', {
-      email,
-      password
-    })
-      .then(response => response.data)
+    return this.service
+      .post("/signup", {
+        email,
+        password
+      })
+      .then(response => response.data);
   },
 
   getMaid() {
-    return this.service.get('/')
-      .then(response => 
-        response.data
-      )
+    return this.service.get("/").then(response => response.data);
   },
 
-  /*getSpecificMaid(
-    foodPreference, 
-    numberOfClient,
-    foodType,
-    mealType
-    ) {
-    return this.service.post('/cooking-service', {
-      foodPreference, 
-      numberOfClient,
-      foodType,
-      mealType
-    })
-    .then(response => response.data)
-  },*/
+  getSpecificMaid(foodType, foodPreference, mealType, serviceType) {
+    debugger;
+    return this.service
+      .post("/cooking-service", {
+        foodType,
+        foodPreference,
+        mealType,
+        serviceType
+      })
+      .then(response => response.data);
+  }
 
   /*loggedin() {
     return this.service.get('/loggedin')
