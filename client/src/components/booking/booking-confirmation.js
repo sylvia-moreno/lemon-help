@@ -1,79 +1,101 @@
 import React from "react";
 
-import service from "../../services/services";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLemon } from "@fortawesome/free-solid-svg-icons";
 
-const BookingConfirmation = (props) => {
+const BookingConfirmation = props => {
   debugger;
-  const COOKING = props.selectedService.serviceType === "cuisine";
-  const CLEANING = props.selectedService.serviceType === "ménage";
-  const BABYSITTING = props.selectedService.serviceType === "babysitting";
+  
+  const {
+    foodType,
+    foodPreference,
+    mealType,
+    serviceType,
+    numberOfClient,
+    selectedDate
+  } = props.selectedService;
+
+  const {
+    username,
+  } = props.selectedMaid;
+
+  const { selectedMaid } = props.selectedMaid;
+
+  const COOKING = serviceType === "cuisine";
+  const CLEANING = serviceType === "ménage";
+  const BABYSITTING = serviceType === "babysitting";
   
   const handleSubmit = event => {
     event.preventDefault();
-
-    //faire appel à un service par type de service
-    serviceCooking
-      .bookingService(foodType, foodPreference, mealType, serviceType)
-      .then(data => {
-        const preferencesUser = {
-          foodType,
-          foodPreference,
-          mealType,
-          serviceType,
-          numberOfClient,
-          selectedDate
-        };
-        setMaids(data);
-        updateMaid(data);
-        selectedService(preferencesUser);
-        history.push("/booking");
-      })
-      .catch(err => err);
+    props.history.push("/payment");
   };
 
   return (
     <form className="booking-confirmation" onSubmit={handleSubmit}>
-      <h2>Prestation : {props.selectedService.serviceType}</h2>
-      <ul>
-        <li>
-          <span className="label">Votre lemonMaid</span>
-          <span className="name">{props.selectedMaid.username}</span>
-        </li>
-        {COOKING ? (
-          <>
+      {selectedMaid !== null || selectedMaid !== undefined ? (
+        <>
+          <h2>Prestation : {serviceType}</h2>
+          <ul>
             <li>
-              <span className="label">Pratique alimentaire</span>
-              <span className="name">{props.selectedService.foodPreference}</span>
+              <span className="label">Votre lemonMaid</span>
+              <span className="name">{username}</span>
             </li>
-            <li>
-              <span className="label">Type de cuisine</span>
-              <span className="name">{props.selectedService.foodType}</span>
-            </li>
-            <li>
-              <span className="label">Type de repas</span>
-              <span className="name">{props.selectedService.mealType}</span>
-            </li>
-            <li>
-              <span className="label">Nombre de client</span>
-              <span className="name">{props.selectedService.numberOfClient}</span>
-            </li>
-            <li>
-              <span className="label">Date</span>
-              <span className="name">{props.selectedService.selectedDate.toLocaleDateString()}</span>
-            </li>
-            <li>
-              <span className="label">Heure</span>
-              <span className="name">{props.selectedService.selectedDate.toLocaleTimeString()}</span>
-            </li>
-          </>
-        ) : (
-          <li>
-            <span className="label"></span>
-            <span className="name"></span>
-          </li>
-        )}
-      </ul>
-      <button className="btn-cta" onClick={handleSubmit}>Valider et payer</button>
+            {COOKING ? (
+              <>
+                <li>
+                  <span className="label">Pratique alimentaire</span>
+                  <span className="name">
+                    {foodPreference}
+                  </span>
+                </li>
+                <li>
+                  <span className="label">Type de cuisine</span>
+                  <span className="name">{foodType}</span>
+                </li>
+                <li>
+                  <span className="label">Type de repas</span>
+                  <span className="name">{mealType}</span>
+                </li>
+                <li>
+                  <span className="label">Nombre de client</span>
+                  <span className="name">
+                    {numberOfClient}
+                  </span>
+                </li>
+                <li>
+                  <span className="label">Date</span>
+                  <span className="name">
+                    {selectedDate.toLocaleDateString()}
+                  </span>
+                </li>
+                <li>
+                  <span className="label">Heure</span>
+                  <span className="name">
+                    {selectedDate.toLocaleTimeString()}
+                  </span>
+                </li>
+              </>
+            ) : (
+              <li>
+                <span className="label"></span>
+                <span className="name"></span>
+              </li>
+            )}
+          </ul>
+          <button className="btn-cta" onClick={handleSubmit}>
+            Valider et payer
+          </button>
+        </>
+      ) : (
+        <>
+          <p>Ooops... Pas si vite, il faut chercher avant de trouver le bon <FontAwesomeIcon icon={faLemon} /></p>
+          <p>
+            <a href="/" className="btn-cta">
+              Choisir un service
+            </a>
+          </p>
+        </>
+      )}
     </form>
   );
 };

@@ -85,7 +85,7 @@ const FormCookingService = ({
   return (
     <form className="form-service form-cooking" onSubmit={handleSubmit}>
       <fieldset>
-        <legend>Pratique alimentaire :</legend>
+        <legend>Régime alimentaire :</legend>
         <div className="form-cooking--group form-cooking--group-radio-button">
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
@@ -121,7 +121,7 @@ const FormCookingService = ({
 
       <fieldset>
         <div className="form-cooking--group form-type">
-          <legend>Cuisine :</legend>
+          <legend>Catégorie :</legend>
           <div className="form-type--radio-group">
             <label className="radio-btn">
               <input

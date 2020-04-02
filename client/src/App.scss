@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600|Nunito:600&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600|Nunito:600&display=swap");
 
-@import './styles/home.scss';
+@import "./styles/home.scss";
 
-$FONT1: 'Nunito', sans-serif;
-$FONT2: 'Nunito Sans', sans-serif;
+$FONT1: "Nunito", sans-serif;
+$FONT2: "Nunito Sans", sans-serif;
 
 body {
   font-family: $FONT2;
@@ -13,26 +13,43 @@ body {
 
 .App {
   //min-height:100vh;
-  display:flex; 
-  align-items:center; 
-  justify-content:center;
-  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  background: #fff;
+  margin-top: 100px;
+  width: 100%;
+  padding: 20px;
 }
 
 input,
-button {font:inherit;}
+button {
+  font: inherit;
+}
 
 form {
-  .error {color:red;}
+  .error {
+    color: red;
+  }
 
   label em {
-    font-style:normal;
-    display:block;
+    font-style: normal;
+    display: block;
   }
 }
 
-h1 {color:#648166;}
+h1 {
+  color: #648166;
+}
 
+h2 {
+  font-size: 16px;
+}
 /*
                     _       
                    (_)      
@@ -45,21 +62,29 @@ h1 {color:#648166;}
 */
 
 .popin {
-  background:white; box-shadow:0 0 .5em rgba(0,0,0,.125);
-  display:flex; width:45em; min-height:30em;
+  background: white;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.125);
+  display: flex;
+  width: 45em;
+  min-height: 30em;
 
-  border-radius:0.25em;overflow:hidden;
+  border-radius: 0.25em;
+  overflow: hidden;
 
   &__one,
-  &__two {width:50%;}
+  &__two {
+    width: 50%;
+  }
 
   &__two {
-    background:#c0e3be url("/arc.svg") left center /5% 110% no-repeat;
+    background: #c0e3be url("/arc.svg") left center / 5% 110% no-repeat;
   }
 
   // padding
   &__one,
-  &__two {padding:3em;}
+  &__two {
+    padding: 3em;
+  }
 }
 
 /*
@@ -72,14 +97,14 @@ h1 {color:#648166;}
 */
 
 .btn-cta {
-  display:inline-block;
-  background: #FD6464;
-  padding:.85em 4em;
-  border-radius: .25em;
-  font-weight:bold;
-  font-size:80%;
-  text-align:center;
-  cursor:pointer;
+  display: inline-block;
+  background: #fd6464;
+  padding: 0.85em 4em;
+  border-radius: 0.25em;
+  font-weight: bold;
+  font-size: 80%;
+  text-align: center;
+  cursor: pointer;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -93,11 +118,17 @@ h1 {color:#648166;}
 }
 
 button.btn {
-  border:inherit;
+  border: inherit;
 }
-a.btn {text-decoration:none; color:inherit;}
+a.btn {
+  text-decoration: none;
+  color: inherit;
+}
 
-.popin .btn {display:block; width:100%;}
+.popin .btn {
+  display: block;
+  width: 100%;
+}
 
 /*
   _                          
@@ -111,29 +142,51 @@ a.btn {text-decoration:none; color:inherit;}
 [data-route="/"],
 [data-route="/profile"] {
   .popin__one {
-    display:flex; flex-direction:column;
-    .cta {margin-top:auto; margin-bottom:0;}
+    display: flex;
+    flex-direction: column;
+    .cta {
+      margin-top: auto;
+      margin-bottom: 0;
+    }
   }
 
-  p em {font-style:normal; color:gray;}
-  p em +span {display:block; font-size:150%;}
+  p em {
+    font-style: normal;
+    color: gray;
+  }
+  p em + span {
+    display: block;
+    font-size: 150%;
+  }
 
-  .btn.logout {background-color:transparent;color:red;}
+  .btn.logout {
+    background-color: transparent;
+    color: red;
+  }
 
-  .btn +.btn {margin-top:1em;}
+  .btn + .btn {
+    margin-top: 1em;
+  }
 
   img.avatar {
-    display:block; width:13em;height:13em;border-radius:100%; object-fit:contain; margin:0 auto;
-    background:#e1e1e1;
-    margin-bottom:1em;
+    display: block;
+    width: 13em;
+    height: 13em;
+    border-radius: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+    background: #e1e1e1;
+    margin-bottom: 1em;
     object-fit: cover;
   }
 
   .popin__two {
-    display:flex; flex-direction:column;
+    display: flex;
+    flex-direction: column;
     p:last-child {
-      margin-top:auto; margin-bottom:0;
-      color:gray;
+      margin-top: auto;
+      margin-bottom: 0;
+      color: gray;
     }
   }
 }
@@ -151,19 +204,36 @@ a.btn {text-decoration:none; color:inherit;}
 
 [data-route="/login"],
 [data-route="/signup"] {
-  .btn {background-color:#ffffff;}
-
-  .popin__one h1 {margin-top:0;}
-
-  .popin__two {
-    display:flex; flex-direction:column;
-    p:last-child {margin-top:auto; margin-bottom:0;}
-
-    p:first-child {margin-top:0;}
+  .btn {
+    background-color: #ffffff;
   }
 
-  .popin__two strong {display:block; font-size:150%;}
+  .popin__one h1 {
+    margin-top: 0;
+  }
 
-  p small {color:gray;}
-  p small +.btn {margin-top:1em;}
+  .popin__two {
+    display: flex;
+    flex-direction: column;
+    p:last-child {
+      margin-top: auto;
+      margin-bottom: 0;
+    }
+
+    p:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .popin__two strong {
+    display: block;
+    font-size: 150%;
+  }
+
+  p small {
+    color: gray;
+  }
+  p small + .btn {
+    margin-top: 1em;
+  }
 }

@@ -11,6 +11,7 @@ import "../../styles/home.scss";
 import "./auth.scss";
 
 const Homepage = ({ user, history }) => {
+  debugger
   const [maids, setMaids] = useState([]);
   const [cookingServiceSelected, setCOOKINGServiceSelected] = useState();
   const [serviceSelected, setServiceSelected] = useState();
@@ -25,7 +26,7 @@ const Homepage = ({ user, history }) => {
 
   const services = [
     { COOKING: "cuisiner" },
-    { CLEANING: "aide ménagère" },
+    { CLEANING: "ménage" },
     { BABYSITTING: "babysitting" }
   ];
 
@@ -48,9 +49,9 @@ const Homepage = ({ user, history }) => {
   return (
     <>
       {!user._id ? (
-        <Redirect to="/landing-page" />
+        <Redirect to="/login" />
       ) : (
-        <div className="home-page">
+        <div className="home-page wrapper">
           <div className="home-page--top-profil">
             <h2 className="home-page--title">Les LemonMaids les mieux notés</h2>
             <div className="profils">
@@ -73,11 +74,12 @@ const Homepage = ({ user, history }) => {
           <div className="home-page--services">
             <h2 className="home-page--title">Choisissez votre service</h2>
             <form className="form-cooking" onSubmit={handleSubmit}>
-              {services.map(service => (
+              {services.map((service, i) => (
                 <ServiceItem
                   serviceValue={[Object.keys(service)]}
                   serviceName={Object.values(service) + ""}
                   hasChecked={handleCheckService}
+                  key={i}
                 />
               ))}
               <button className="btn" onClick={handleSubmit}>Rechercher</button>

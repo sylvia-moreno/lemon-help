@@ -1,0 +1,13 @@
+.select-checkbox {
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+  .checkboxOverride {
+    margin: 20px 120px;
+    position: relative;
+    width: 25px;
+  }
+  .checkboxOverride input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
+}

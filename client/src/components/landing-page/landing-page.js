@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import maidService from '../../services/maids';
-         
-import RatedProfil  from '../rated-profil/rated-profil';
 
+const LandingPage = ({history, user}) => {
+  debugger
+  useEffect(() => {
+    if(!Object.entries(user).length === 0) {
+      debugger
+      history.push('/')
+    }
+    
+  }, []);
 
-const LandingPage = ({history}) => {
     return (
         <div className="landing-page">
             <div className="app-home">
             <div className="app-home--wrapper">
               <div className="app-home--illustration">
-                <img src="../illustration 19.png" alt="image home" />
+                <img src="../illustration 19.png" alt="illustration home" />
               </div>
               <h1 className="app-home--logo">
                 <span className="logo-part-1">Lemon</span>

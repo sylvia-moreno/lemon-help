@@ -8,9 +8,9 @@ import Signup from "./components/auth/Signup.js";
 import Login from "./components/auth/Login.js";
 import Profile from "./components/auth/Profile.js";
 import FormCookingService from "./components/form/form-service/form-cooking-service";
-
 import Booking from "./components/booking/booking";
 import BookingConfirmation from "./components/booking/booking-confirmation";
+import Payment from "./components/payment/payment";
 import LandingPage from "./components/landing-page/landing-page";
 
 import authService from "./components/auth/auth-service.js";
@@ -33,6 +33,7 @@ class App extends Component {
 
   fetchUser = () => {
     if (!this.state.user._id) {
+      debugger;
       authService
         .loggedin()
         .then(data => this.setState({ user: data }))
@@ -115,11 +116,7 @@ class App extends Component {
                 exact
                 path="/landing-page"
                 render={props => (
-                  <LandingPage
-                    history={props.history}
-                    updateUser={this.updateUser}
-                    updateMaid={this.updateMaid}
-                  />
+                  <LandingPage history={props.history} user={this.state.user} />
                 )}
               />
 
@@ -156,9 +153,23 @@ class App extends Component {
                     history={props.history}
                     selectedService={this.state.selectedService}
                     selectedMaid={this.state.selectedMaid}
+                    user={this.state.user}
                   />
                 )}
               />
+
+              <Route
+                exact
+                path="/payment"
+                render={props => (
+                  <Payment
+                    history={props.history}
+                    selectedService={this.state.selectedService}
+                    selectedMaid={this.state.selectedMaid}
+                    user={this.state.user}
+                  />
+                )}
+                />
 
               {/* last route, ie: 404 */}
               <Route render={() => <h1>Not Found</h1>} />

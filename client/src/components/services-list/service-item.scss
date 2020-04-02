@@ -1,28 +1,55 @@
 .services-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+
+  &--content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--icon svg {
+    margin-right: 10px;
+  }
+
+  &--checked {
+    border-color: #fd6464;
+    .list-service-item {
+      &--icon {
+        color: #fd6464;
+      }
+
+      &--icon-label {
+        color: #fd6464;
+      }
+    }
+  }
+}
+
+.list-service-item {
+  border: 1px solid #cccccc7a;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+  &--content {
+    display: flex;
     padding: 10px;
-    width: 100%;
+    justify-content: space-between;
+  }
+  &--icon {
+    display: flex;
+    align-items: center;
 
-    &--content {
-        display: flex;
-        justify-content: space-between;
+    &-container {
+      margin-right: 10px;
+      background: #b4cec3;
+      border-radius: 10px;
+      padding: 5px;
+      svg {
+        width: 40px;
+        height: 40px;
+      }
     }
-
-    &--icon svg{
-        margin-right: 10px;
-    }
-
-    &--checked {
-        border-color: #FD6464;
-        .list-service-item {
-            &--icon {
-                color: #FD6464;
-            }
-
-            &--icon-label {
-                color: #FD6464;
-            }
-        }
-    }
+  }
 }

@@ -10,6 +10,7 @@ export default class extends React.Component {
     username: "",
     password: "",
     email: "",
+    address: "",
     cityName: "",
     cityCode: "",
     country: "",
@@ -22,7 +23,15 @@ export default class extends React.Component {
     event.preventDefault();
 
     // 1. Signup
-    authService.signup(this.state.username, this.state.password)
+    authService.signup(
+      this.state.username, 
+      this.state.password,
+      this.state.email,
+      this.state.address,
+      this.state.cityName,
+      this.state.cityCode,
+      this.state.country,
+      )
       .then(() => {
         this.setState({error: ""});
 
@@ -31,6 +40,7 @@ export default class extends React.Component {
           this.state.username, 
           this.state.password, 
           this.state.email, 
+          this.state.address, 
           this.state.cityName, 
           this.state.cityCode, 
           this.state.country, 
