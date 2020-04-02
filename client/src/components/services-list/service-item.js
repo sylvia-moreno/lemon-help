@@ -31,7 +31,6 @@ const ServiceItem = ({ serviceValue, serviceName, hasChecked }) => {
   const [checked, setChecked] = React.useState(false);
 
   const handledChange = useCallback(e => {
-    debugger
     setChecked(e.target.checked);
     if (e.target.checked) {
       e.target.checked ? setIsChecked(true) : setIsChecked(false);
@@ -42,8 +41,6 @@ const ServiceItem = ({ serviceValue, serviceName, hasChecked }) => {
   const servicesWithIcons = icons.find(serviceIcon =>
     serviceValue[0].includes(serviceIcon.code)
   );
-
-  debugger;
   return (
     <>
       <div

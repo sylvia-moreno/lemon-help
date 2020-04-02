@@ -17,13 +17,13 @@ body {
   align-items: center;
   justify-content: center;
   background: #fcc434;
+  flex-direction: column;
 }
 
 .wrapper {
   border-top-left-radius: 22px;
   border-top-right-radius: 22px;
   background: #fff;
-  margin-top: 100px;
   width: 100%;
   padding: 20px;
 }
