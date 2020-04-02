@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import Popin from '../Popin.js';
-import authService from './auth-service.js';
+import authService from "./auth-service.js";
 
 export default class extends React.Component {
   state = {
@@ -17,139 +16,169 @@ export default class extends React.Component {
     //gender: "",
 
     error: ""
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     // 1. Signup
-    authService.signup(
-      this.state.username, 
-      this.state.password,
-      this.state.email,
-      this.state.address,
-      this.state.cityName,
-      this.state.cityCode,
-      this.state.country,
+    authService
+      .signup(
+        this.state.username,
+        this.state.password,
+        this.state.email,
+        this.state.address,
+        this.state.cityName,
+        this.state.cityCode,
+        this.state.country
       )
       .then(() => {
-        this.setState({error: ""});
+        this.setState({ error: "" });
 
         // 2. then, update with user infos
-        authService.edit(
-          this.state.username, 
-          this.state.password, 
-          this.state.email, 
-          this.state.address, 
-          this.state.cityName, 
-          this.state.cityCode, 
-          this.state.country, 
-          //this.state.gender, 
+        authService
+          .edit(
+            this.state.username,
+            this.state.password,
+            this.state.email,
+            this.state.address,
+            this.state.cityName,
+            this.state.cityCode,
+            this.state.country
+            //this.state.gender,
           )
           .then(response => {
-            debugger
-            this.setState({error: ""});
-            
-            this.props.updateUser(response);
-            this.props.history.push('/');
-          })
-          .catch(err => this.setState({error: err.response.data.message}))
-      })
-      .catch(err => this.setState({error: err.response.data.message}))
-    ;
-  }
+            debugger;
+            this.setState({ error: "" });
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  } 
+            this.props.updateUser(response);
+            this.props.history.push("/");
+          })
+          .catch(err => this.setState({ error: err.response.data.message }));
+      })
+      .catch(err => this.setState({ error: err.response.data.message }));
+  };
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
   render() {
     return (
-      <div>
-          <h1>Tu n'as pas encore de compte ?</h1>
-          
-          <form onSubmit={this.handleSubmit}>
-
-            {this.state.error && (
-              <p className="error">{this.state.error}</p>
-            )}
-
-            <div className="field">
-              <label className="name">Nom d'utilisateur</label>
-              <div className="control has-icons-left has-icons-right">
-                <input type="text" name="username" className="input is-success" value={this.state.username} onChange={this.handleChange} />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-user"></i>
-                </span>
-                <span className="icon is-small is-right">
-                  <i className="fas fa-check"></i>
-                </span>
-              </div>
-            </div>
-
-            <p>
-              <label>
-                <em>Email</em>
-                <input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                <em>Mot de passe</em>
-                <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                <em>Adresse</em>
-                <input type="address" name="address" value={this.state.address} onChange={this.handleChange} />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                <em>Ville</em>
-                <input type="cityName" name="cityName" value={this.state.cityName} onChange={this.handleChange} />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                <em>Code Postale</em>
-                <input type="cityCode" name="cityCode" value={this.state.cityCode} onChange={this.handleChange} />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                <em>Pays</em>
-                <select name="country" value={this.state.country} onChange={this.handleChange}>
-                  <option value="France">France</option>
-                </select>
-              </label>
-            </p>
-
-            
-          </form>
-
-          <p>
-            <small>If you already have an account, you can login from <Link to="/login">here</Link></small>
-          </p>
-
-      
-          <p>
-            <strong>Hello!!</strong>
-            Welcome to IronProfile!
-          </p>
-          
-          <p>
-            <small>If you signup, you agree with all our terms and conditions where we can do whatever we want with the data!</small>
-            <button className="btn" onClick={this.handleSubmit}>Create the account</button>
+      <form className="signup" onSubmit={this.handleSubmit}>
+        <div className="login-logo">
+          <h1 className="logo">LemonMaid</h1>
+          <div className="icons">
+            <span className="icons-item"></span>
+            <span className="icons-item"></span>
+            <span className="icons-item"></span>
+          </div>
+          <p className="label">
+            Nos prestataires vous rendent la vie plus facile
           </p>
         </div>
+        <div className="login-form">
+          {this.state.error && (
+            <div className="mea-error">
+              <p>{this.state.error}</p>
+            </div>
+          )}
+
+          <h2>Identification</h2>
+          <p>
+            <label>
+              <input
+                type="text"
+                name="username"
+                className="input is-success"
+                value={this.state.username}
+                onChange={this.handleChange}
+                placeholder="Nom d'utilisateur"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                placeholder="Email"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                placeholder="Mot de passe"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="address"
+                name="address"
+                value={this.state.address}
+                onChange={this.handleChange}
+                placeholder="Adresse"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="cityName"
+                name="cityName"
+                value={this.state.cityName}
+                onChange={this.handleChange}
+                placeholder="Ville"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="cityCode"
+                name="cityCode"
+                value={this.state.cityCode}
+                onChange={this.handleChange}
+                placeholder="Code Postale"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <select
+                name="country"
+                value={this.state.country}
+                onChange={this.handleChange}
+              >
+                <option value="France">France</option>
+              </select>
+            </label>
+          </p>
+
+          <button className="btn-cta" onClick={this.handleSubmit}>
+            Créer un compte
+          </button>
+          <div className="login-link--signup">
+          <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
+          </div>
+        </div>
+      </form>
     );
   }
 }

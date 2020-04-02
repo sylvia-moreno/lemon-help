@@ -16,6 +16,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fcc434;
 }
 
 .wrapper {
@@ -98,9 +99,9 @@ h2 {
 
 .btn-cta {
   display: inline-block;
-  background: #fd6464;
-  padding: 0.85em 4em;
-  border-radius: 0.25em;
+  background: #6ea64d;
+  padding: 1.5em 4em;
+  border-radius: 10px;
   font-weight: bold;
   font-size: 80%;
   text-align: center;
@@ -109,7 +110,7 @@ h2 {
   text-transform: uppercase;
   text-decoration: none;
   margin: 5px 0;
-  width: 100%;
+  width: 80%;
   border: none;
   margin: 30px 0;
   &:hover {
@@ -236,4 +237,15 @@ a.btn {
   p small + .btn {
     margin-top: 1em;
   }
+}
+
+.mea-error {
+  border-radius: 10px;
+  padding: 3px;
+  font-size: 11px;
+  color: #ffffff !important;
+  background: #f37e58;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
 }

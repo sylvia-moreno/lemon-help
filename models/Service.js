@@ -6,7 +6,7 @@ const serviceSchema = new Schema({
   price: String,
   type: {
     type: String,
-    enum: ['rapassage', 'menage', 'vaiselle', 'cuisine', 'garde d\'enfant']
+    enum: ['ménage', 'cuisine', 'babysitting']
   },
   fourniture: {
     type: String,

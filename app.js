@@ -46,10 +46,13 @@ require('./passport')(app);
 
 const authRoutes = require('./routes/auth');
 const maidsRoutes = require('./routes/maids');
+const bookingRoutes = require('./routes/booking');
+
 //const landingRoutes = require('./routes/landing-page');
 
 app.use('/auth', authRoutes);
 app.use('/maids', maidsRoutes);
+app.use('/booking', bookingRoutes);
 //app.use('/landing-page', landingRoutes);
 
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import Popin from '../Popin.js';
-import authService from './auth-service.js';
+import Popin from "../Popin.js";
+import authService from "./auth-service.js";
 
 export default class extends React.Component {
   state = {
@@ -11,72 +11,79 @@ export default class extends React.Component {
     password: "",
 
     error: ""
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
-    authService.login(this.state.username, this.state.password)
+    authService
+      .login(this.state.username, this.state.password)
       .then(response => {
-        this.setState({error: ""});
+        this.setState({ error: "" });
 
         this.props.updateUser(response);
-        this.props.history.push('/');
+        this.props.history.push("/");
       })
-      .catch(err => this.setState({error: err.response.data.message}))
-    ;
-  }
+      .catch(err => this.setState({ error: err.response.data.message }));
+  };
 
-  handleChange = (event) => {
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  } 
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
   render() {
     return (
-      <Popin one={(
-        <>
-          <h1>Log in</h1>
-          
-          <form onSubmit={this.handleSubmit}>
-
-            {this.state.error && (
-              <p className="error">{this.state.error}</p>
-            )}
-
-            <p>
-              <label>
-                <em>Username</em>
-                <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                <em>Password</em>
-                <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-              </label>
-            </p>
-
-          </form>
+      <form className="login" onSubmit={this.handleSubmit}>
+        <div className="login-logo">
+          <h1 className="logo">LemonMaid</h1>
+          <div className="icons">
+            <span className="icons-item"></span>
+            <span className="icons-item"></span>
+            <span className="icons-item"></span>
+          </div>
+          <p className="label">
+            Nos prestataires vous rendent la vie plus facile
+          </p>
+        </div>
+        <div className="login-form">
+          {this.state.error && (
+            <div className="mea-error">
+              <p>{this.state.error}</p>
+            </div>
+          )}
+          <h2>Identification</h2>
+          <p>
+            <label>
+              <input
+                type="text"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                placeholder="Nom d'utilisateur"
+              />
+            </label>
+          </p>
 
           <p>
-            <small>If you don't have an account yet, you can create your account <Link to="/signup">here</Link></small>
+            <label>
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                placeholder="Mot de passe"
+              />
+            </label>
           </p>
-        </>
-      )} two={(
-        <>
-          <p>
-            <strong>Hello!!</strong>
-            Awesome to have at IronProfile again!
-          </p>
-          
-          <p>
-            <small>If you login, you agree with all our terms and conditions where we can do whatever we want with the data!</small>
-            <button className="btn" onClick={this.handleSubmit}>Log in</button>
-          </p>
-        </>
-      )} />
+          <button className="btn-cta" onClick={this.handleSubmit}>
+            SE CONNECTER
+          </button>
+          <div className="login-link--signup">
+            Vous n'avez pas de compte ? <Link to="/signup">Inscrivez-vous</Link>
+          </div>
+        </div>
+      </form>
     );
   }
 }

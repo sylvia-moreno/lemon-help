@@ -1,12 +1,6 @@
 import React from "react";
 import { useState, useCallback } from "react";
-
-import SelectCheckbox from "../select-checkbox/select-checkbox";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCookieBite } from "@fortawesome/free-solid-svg-icons";
-import { faBroom } from "@fortawesome/free-solid-svg-icons";
-import { faBaby } from "@fortawesome/free-solid-svg-icons";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import IconCooking from "../icons/icon-cooking";
 import IconCleaning from "../icons/icon-cleaning";
@@ -34,8 +28,11 @@ const icons = [
 
 const ServiceItem = ({ serviceValue, serviceName, hasChecked }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   const handledChange = useCallback(e => {
+    debugger
+    setChecked(e.target.checked);
     if (e.target.checked) {
       e.target.checked ? setIsChecked(true) : setIsChecked(false);
       hasChecked(e.target.checked, serviceValue);
@@ -58,24 +55,21 @@ const ServiceItem = ({ serviceValue, serviceName, hasChecked }) => {
       >
         <label className="list-service-item--content">
           <div className="list-service-item--icon">
-            
-                <div className="list-service-item--icon-container">
-                  {servicesWithIcons.icon}
-                </div>
-                <span className="list-service-item--icon-label">
-                  {servicesWithIcons.label}
-                </span>
-              
+            <div className="list-service-item--icon-container">
+              {servicesWithIcons.icon}
+            </div>
+            <span className="list-service-item--icon-label">
+              {servicesWithIcons.label}
+            </span>
           </div>
-          <input
-            type="checkbox"
-            className="list-service-item--checkbox"
+          <Checkbox
+            checked={checked}
             onChange={handledChange}
+            disabled={serviceName === "babysitting" || serviceName === "ménage" ? true : false}
+            inputProps={{ "aria-label": "service choise checkbox" }}
           />
         </label>
       </div>
-
-      
     </>
   );
 };

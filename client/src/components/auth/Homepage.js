@@ -48,7 +48,7 @@ const Homepage = ({ user, history }) => {
 
   return (
     <>
-      {!user._id ? (
+      {user === false? (
         <Redirect to="/login" />
       ) : (
         <div className="home-page wrapper">
@@ -57,7 +57,7 @@ const Homepage = ({ user, history }) => {
             <div className="profils">
               {maids.map(
                 (maid, i) =>
-                  i < 5 &&
+                  i < 3 &&
                   !!maid.rating &&
                   !!maid.imageProfil && (
                     <RatedProfil
@@ -82,7 +82,7 @@ const Homepage = ({ user, history }) => {
                   key={i}
                 />
               ))}
-              <button className="btn" onClick={handleSubmit}>Rechercher</button>
+              <button className="btn-cta" onClick={handleSubmit}>Rechercher</button>
             </form>
 
             {/*
