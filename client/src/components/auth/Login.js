@@ -2,8 +2,10 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import Popin from "../Popin.js";
+import IconHeaderMaids from "../icons/icon-header-maids";
 import authService from "./auth-service.js";
+
+import './auth.scss';
 
 export default class extends React.Component {
   state = {
@@ -38,13 +40,11 @@ export default class extends React.Component {
         <div className="login-logo">
           <h1 className="logo">LemonMaid</h1>
           <div className="icons">
-            <span className="icons-item"></span>
-            <span className="icons-item"></span>
-            <span className="icons-item"></span>
+            <span className="icons-item">
+              <IconHeaderMaids />
+            </span>
           </div>
-          <p className="label">
-            Nos prestataires vous rendent la vie plus facile
-          </p>
+          <p className="label">La recette d'une vie plus facile</p>
         </div>
         <div className="login-form">
           {this.state.error && (

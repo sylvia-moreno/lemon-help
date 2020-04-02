@@ -2,7 +2,6 @@ import React from "react";
 
 const IconCooking = props => (
   <svg
-    height="480pt"
     viewBox="-6 0 480 480.00011"
     width="480pt"
     xmlns="http://www.w3.org/2000/svg"

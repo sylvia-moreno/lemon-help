@@ -2,8 +2,10 @@
 .login,
 .signup {
   width: 100%;
+  background: #fcc434;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   h2 {
     font-size: 20px;
@@ -11,16 +13,36 @@
   }
 
   &-logo {
-    padding: 30px 20px 100px;
+    padding: 0 20px 40px;
     width: 100%;
     background: #fcc434;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    .label {
+      font-size: 11px;
+    }
     .logo {
       font-family: "Lobster", cursive;
       color: #f58c35;
       text-align: center;
-      font-size: 20px;
+      font-size: 41px;
+      margin-bottom: 19px;
     }
+
+      .icons-item {
+        display: flex;
+        background: #fff;
+        padding: 15px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        svg {
+          width: 80px;
+          height: 80px;
+        }
+      }
+    
   }
 
   &-form {
