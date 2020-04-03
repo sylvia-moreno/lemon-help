@@ -26,7 +26,7 @@ const Homepage = ({ user, history }) => {
       .getMaid()
       .then(data => setMaids(data))
       .catch(err => setMaids({}));
-  }, [user, maids]);
+  }, [user]);
 
   const services = [
     { COOKING: "cuisiner" },

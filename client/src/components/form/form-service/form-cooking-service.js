@@ -10,9 +10,9 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
-import { faCarrot } from "@fortawesome/free-solid-svg-icons";
-import { faDrumstickBite } from "@fortawesome/free-solid-svg-icons";
-import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import IconVegan from "../../icons/icon-vegan";
+import IconMeat from "../../icons/icon-meat";
+import IconAllFood from "../../icons/icon-allfood";
 
 import maidService from "../../../services/maids";
 
@@ -21,11 +21,7 @@ import Counter from "../../counter/counter";
 
 import "./form.scss";
 
-const FormCookingService = ({
-  history,
-  updateMaid,
-  selectedService
-}) => {
+const FormCookingService = ({ history, updateMaid, selectedService }) => {
   const [foodPreference, setFoodPreference] = useState("");
   const [numberOfClient, setNumberOfClient] = useState(1);
   const [foodType, setFoodType] = useState("");
@@ -83,7 +79,7 @@ const FormCookingService = ({
   };
 
   return (
-    <form className="form-service form-cooking" onSubmit={handleSubmit}>
+    <form className="form-service form-cooking wrapper" onSubmit={handleSubmit}>
       <fieldset>
         <legend>Régime alimentaire :</legend>
         <div className="form-cooking--group form-cooking--group-radio-button">
@@ -93,7 +89,7 @@ const FormCookingService = ({
             label="Végétarien"
             value="végétarien"
             name="végétarien"
-            icon={faCarrot}
+            icon={<IconVegan />}
           />
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
@@ -101,7 +97,7 @@ const FormCookingService = ({
             label="Carnivore"
             value="carnivore"
             name="carnivore"
-            icon={faDrumstickBite}
+            icon={<IconMeat />}
           />
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
@@ -109,7 +105,7 @@ const FormCookingService = ({
             label="De tout"
             value="tousAliments"
             name="tousAliments"
-            icon={faUtensils}
+            icon={<IconAllFood />}
           />
         </div>
       </fieldset>
