@@ -82,7 +82,7 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
   return (
     <form className="form-service form-cooking wrapper" onSubmit={handleSubmit}>
       <fieldset>
-        <legend>Régime alimentaire :</legend>
+        <legend>Régime alimentaire </legend>
         <div className="form-cooking--group form-cooking--group-radio-button">
           <RadioButtonIcon
             onChange={handleChangeFoodPreference}
@@ -118,7 +118,7 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
 
       <fieldset>
         <div className="form-cooking--group form-type">
-          <legend>Catégorie :</legend>
+          <legend>Catégorie </legend>
           <div className="form-type--radio-group categorie">
             <CapsuleButtonIcon
               name="français"
@@ -165,37 +165,37 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
 
       <fieldset>
         <div className="form-cooking--group form-type">
-          <legend>Repas :</legend>
+          <legend>Repas </legend>
           <div className="form-type--radio-group repas">
             <CapsuleButtonIcon
               name="petit-déjeuné"
               value="petit-déjeuné"
               label="Petit-déjeuné"
-              checked={foodType === "petit-déjeuné"}
-              onChange={handleChangeFoodType}
+              checked={mealType === "petit-déjeuné"}
+              onChange={handleChangeMealType}
             />
             <CapsuleButtonIcon
               name="déjeuné"
               value="déjeuné"
               label="Déjeuné"
-              checked={foodType === "déjeuné"}
-              onChange={handleChangeFoodType}
+              checked={mealType === "déjeuné"}
+              onChange={handleChangeMealType}
             />
 
             <CapsuleButtonIcon
               name="goûter"
               value="goûter"
               label="Goûter"
-              checked={foodType === "goûter"}
-              onChange={handleChangeFoodType}
+              checked={mealType === "goûter"}
+              onChange={handleChangeMealType}
             />
 
             <CapsuleButtonIcon
               name="diner"
               value="diner"
               label="Dîner"
-              checked={foodType === "diner"}
-              onChange={handleChangeFoodType}
+              checked={mealType === "diner"}
+              onChange={handleChangeMealType}
             />
           </div>
         </div>
@@ -209,7 +209,7 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
             format="dd/MM/yyyy"
             margin="normal"
             id="date-picker-inline"
-            label="Date :"
+            label="Date "
             value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
@@ -222,7 +222,7 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
           <KeyboardTimePicker
             margin="normal"
             id="time-picker"
-            label="Horaire :"
+            label="Horaire "
             value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{

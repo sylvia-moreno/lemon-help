@@ -12,7 +12,7 @@ const Booking = (props) => {
   }
 
   return (
-    <div className="booking">
+    <div className="booking wrapper">
       <h2 className="booking-title">
         Voici les lemonMaids qui feront votre bonheur
       </h2>

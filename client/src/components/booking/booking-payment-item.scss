@@ -1,0 +1,82 @@
+.booking-payment-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+
+  &:last-child{
+    margin-bottom: 0;
+  }
+
+  &--content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--icon {
+    display: flex;
+    align-items: center;
+    &-container {
+      margin-right: 8px;
+      background: #eceff1;
+      border-radius: 10px;
+      padding: 7px 10px 5px;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+    &-label {
+      .code-card {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &--checked {
+    border-color: #fcc434;
+    .list-service-item {
+      &--icon {
+        color: #fd6464;
+
+      }
+
+      &--icon-label {
+        color: #fd6464;
+      }
+    }
+  }
+}
+
+.list-service-item {
+  border: 1px solid #cccccc7a;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+  &--content {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &--icon {
+    display: flex;
+    align-items: center;
+
+    &-container {
+      margin-right: 10px;
+      background: #fcd485;
+      border-radius: 10px;
+      padding: 7px 10px 5px;
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  &--checked,
+  &:hover {
+    border: 1px solid #f7b249;
+  }
+}

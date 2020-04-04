@@ -37,6 +37,7 @@ const CardProfil = (props) => {
             </div>
             <div className="container">
               <div className="rating">
+                Note: 
                 <span className="rating-number">{props.maid.rating}</span>
                 <FontAwesomeIcon icon={faLemon} />
               </div>
@@ -46,12 +47,12 @@ const CardProfil = (props) => {
             <div className="container-cta">
               <a
                 href={`/maids-profil/${props.maid._id}`}
-                className="btn-cta container-show-profil"
+                className="bta-link--NoBg container-show-profil"
               >
                 Voir son profil
               </a>
               <button
-                className="btn-cta container-selected"
+                className="bta-link--Bg container-selected"
                 onClick={handleSubmit}
               >
                 Réserver

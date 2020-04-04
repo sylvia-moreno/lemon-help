@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./capsule-button.scss";
 
 const CapsuleButtonIcon = (props) => {
-
+debugger
     return (
         <div className={classNames("capsule-button", { "capsule-button--checked": props.checked })}>
             <input className="capsule-button--input" onChange={props.onChange} value={props.value} name={props.name} type="radio" checked={props.checked} />
@@ -15,4 +15,4 @@ const CapsuleButtonIcon = (props) => {
     );
 }
 
-export default CapsuleButtonIcon;
+export default React.memo(CapsuleButtonIcon);

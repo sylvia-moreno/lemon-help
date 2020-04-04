@@ -175,7 +175,7 @@ export default class extends React.Component {
           <button className="btn-cta" onClick={this.handleSubmit}>
             Créer un compte
           </button>
-          <div className="login-link--signup">
+          <div className="bta-link--NoBg">
           <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
           </div>
         </div>

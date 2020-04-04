@@ -27,12 +27,15 @@
   }
 
   &--info {
-    margin: 12px 12px 0;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 
     .block {
       display: flex;
-      justify-content: space-between;
       &:first-child {
+        flex-direction: column;
         margin-bottom: 14px;
       }
     }
@@ -57,7 +60,8 @@
 
       &-cta {
         display: flex;
-
+        flex-direction: column;
+        justify-content: space-between;
         .btn-cta {
           margin: 0;
         }
@@ -76,9 +80,14 @@
       }
 
       .rating {
+        margin-top: 2px;
+        font-size: 12px;
         &-number,
         svg {
           color: #f7b249;
+        }
+        &-number {
+          margin-left: 5px;
         }
       }
     }

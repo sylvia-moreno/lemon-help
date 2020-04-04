@@ -3,7 +3,6 @@
   legend {
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
-    font-size: 18px;
   }
 
   &--group {
@@ -93,10 +92,23 @@
 
   
 }
+
+.MuiFormLabel-root.MuiInputLabel-root {
+  font-size: 19px;
+  color: inherit;
+  font-family: inherit;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
 .MuiFormControl-marginNormal {
   width: 100%;
   
 }
 .MuiInputBase-root {
   font-family: inherit !important;
+}
+
+label + .MuiInput-formControl {
+  margin-top: 29px !important;
 }
