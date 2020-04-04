@@ -25,6 +25,11 @@
       padding-top: 15px;
     }
   }
+  .categorie,
+  .repas {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 ///Btn radio
@@ -85,4 +90,13 @@
       transition: background 0.25s linear;
     }
   }
+
+  
+}
+.MuiFormControl-marginNormal {
+  width: 100%;
+  
+}
+.MuiInputBase-root {
+  font-family: inherit !important;
 }

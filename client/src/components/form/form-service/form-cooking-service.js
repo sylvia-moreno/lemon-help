@@ -17,6 +17,7 @@ import IconAllFood from "../../icons/icon-allfood";
 import maidService from "../../../services/maids";
 
 import RadioButtonIcon from "../radio-button-icon/radio-button-icon";
+import CapsuleButtonIcon from "../../capsule-button/capsule-button";
 import Counter from "../../counter/counter";
 
 import "./form.scss";
@@ -118,66 +119,46 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
       <fieldset>
         <div className="form-cooking--group form-type">
           <legend>Catégorie :</legend>
-          <div className="form-type--radio-group">
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="français"
-                value="français"
-                checked={foodType === "français"}
-                onChange={handleChangeFoodType}
-              />
-              Français
-              <div className="radio-btn--check"></div>
-            </label>
+          <div className="form-type--radio-group categorie">
+            <CapsuleButtonIcon
+              name="français"
+              value="français"
+              label="Français"
+              checked={foodType === "français"}
+              onChange={handleChangeFoodType}
+            />
 
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="indien"
-                value="indien"
-                checked={foodType === "indien"}
-                onChange={handleChangeFoodType}
-              />
-              Indien
-              <div className="radio-btn--check"></div>
-            </label>
+            <CapsuleButtonIcon
+              name="indien"
+              value="indien"
+              label="Indien"
+              checked={foodType === "indien"}
+              onChange={handleChangeFoodType}
+            />
 
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="américain"
-                value="américain"
-                checked={foodType === "américain"}
-                onChange={handleChangeFoodType}
-              />
-              Americain - Burger
-              <div className="radio-btn--check"></div>
-            </label>
+            <CapsuleButtonIcon
+              name="américain"
+              value="américain"
+              label="Americain - Burger"
+              checked={foodType === "américain"}
+              onChange={handleChangeFoodType}
+            />
 
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="italien"
-                value="italien"
-                checked={foodType === "italien"}
-                onChange={handleChangeFoodType}
-              />
-              Italien
-              <div className="radio-btn--check"></div>
-            </label>
+            <CapsuleButtonIcon
+              name="italien"
+              value="italien"
+              label="Italien"
+              checked={foodType === "italien"}
+              onChange={handleChangeFoodType}
+            />
 
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="libanais"
-                value="libanais"
-                checked={foodType === "libanais"}
-                onChange={handleChangeFoodType}
-              />
-              Libanais
-              <div className="radio-btn--check"></div>
-            </label>
+            <CapsuleButtonIcon
+              name="libanais"
+              value="libanais"
+              label="Libanais"
+              checked={foodType === "libanais"}
+              onChange={handleChangeFoodType}
+            />
           </div>
         </div>
       </fieldset>
@@ -185,53 +166,37 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
       <fieldset>
         <div className="form-cooking--group form-type">
           <legend>Repas :</legend>
-          <div className="form-type--radio-group">
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="petit-déjeuné"
-                value="petit-déjeuné"
-                checked={mealType === "petit-déjeuné"}
-                onChange={handleChangeMealType}
-              />
-              Petit déjeuné
-              <div className="radio-btn--check"></div>
-            </label>
+          <div className="form-type--radio-group repas">
+            <CapsuleButtonIcon
+              name="petit-déjeuné"
+              value="petit-déjeuné"
+              label="Petit-déjeuné"
+              checked={foodType === "petit-déjeuné"}
+              onChange={handleChangeFoodType}
+            />
+            <CapsuleButtonIcon
+              name="déjeuné"
+              value="déjeuné"
+              label="Déjeuné"
+              checked={foodType === "déjeuné"}
+              onChange={handleChangeFoodType}
+            />
 
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="déjeuné"
-                value="déjeuné"
-                checked={mealType === "déjeuné"}
-                onChange={handleChangeMealType}
-              />
-              Déjeuné
-              <div className="radio-btn--check"></div>
-            </label>
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="goûter"
-                value="goûter"
-                checked={mealType === "goûter"}
-                onChange={handleChangeMealType}
-              />
-              Goûter
-              <div className="radio-btn--check"></div>
-            </label>
+            <CapsuleButtonIcon
+              name="goûter"
+              value="goûter"
+              label="Goûter"
+              checked={foodType === "goûter"}
+              onChange={handleChangeFoodType}
+            />
 
-            <label className="radio-btn">
-              <input
-                type="radio"
-                name="diner"
-                value="diner"
-                checked={mealType === "diner"}
-                onChange={handleChangeMealType}
-              />
-              Dîner
-              <div className="radio-btn--check"></div>
-            </label>
+            <CapsuleButtonIcon
+              name="diner"
+              value="diner"
+              label="Dîner"
+              checked={foodType === "diner"}
+              onChange={handleChangeFoodType}
+            />
           </div>
         </div>
       </fieldset>

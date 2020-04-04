@@ -2,24 +2,35 @@
   display: flex;
   position: relative;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
-  max-width: 130px;
-  justify-content: center;
+  max-width: 140px;
+  align-items: center;
+  padding: 5px 10px;
 
   &--checked {
-    border: 1px solid #fd6464;
-    .radio-button-icon
-    {
-        &--icon,
-        &--label {
-            color: #fd6464;
-        }
+    border: 1px solid #e8bb62;
+    .radio-button-icon {
+      &--icon,
+      &--label {
+        color: #e8bb62; 
+        
+      }
+    }
+    .radio-button-icon--icon {
+      background: #fcd485;
     }
   }
 
   &--icon {
     margin-right: 8px;
+    background: #dcdcdc; 
+    border-radius: 10px;
+    padding: 7px 10px 5px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   &--input {
@@ -32,5 +43,6 @@
     right: 0;
     bottom: 0;
     z-index: 10;
+    cursor: pointer;
   }
 }
