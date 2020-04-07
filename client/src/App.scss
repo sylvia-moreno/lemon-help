@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600|Nunito:600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
 @import "./styles/home.scss";
 
@@ -25,7 +25,9 @@ body {
 
 .alignCenter {
   display: flex;
-  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .wrapper {
@@ -122,7 +124,7 @@ h2 {
   border: none;
   margin: 30px 0;
   &:hover {
-    background: #ffb79e;
+    background: #648166;
   }
 }
 
@@ -277,7 +279,7 @@ a.btn {
 
 .bta-link--Bg {
   text-decoration: none;
-  background:#fcc434;
+  background: #fcc434;
   border-radius: 10px;
   padding: 6px;
   font-size: 12px;
@@ -309,5 +311,3 @@ a.btn {
     color: #fcc434 !important;
   }
 }
-
-

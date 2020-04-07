@@ -14,7 +14,6 @@ import "./booking.scss";
 import "../form/radio-button-icon/radio-button-icon.scss";
 
 const BookingConfirmation = props => {
-  ;
   const [hasChecked, setHasChecked] = useState(false);
   const [methodPaymentSelected, setMethodPaymentSelected] = useState("");
   const [account, setAccount] = useState();
@@ -27,6 +26,10 @@ const BookingConfirmation = props => {
     setAccount(price + pourcent);
   }, []);
 
+  useEffect(() => {
+    props.currentPageName("Confirmation & Paiement");
+  }, []);
+
   const {
     foodType,
     foodPreference,
@@ -35,11 +38,8 @@ const BookingConfirmation = props => {
     numberOfClient,
     selectedDate
   } = props.selectedService;
-
-  const { username } = props.selectedMaid;
-
-  const { selectedMaid } = props.selectedMaid;
-
+  const { username, rate } = props.selectedMaid;
+  
   const COOKING = serviceType === "cuisine";
   const CLEANING = serviceType === "ménage";
   const BABYSITTING = serviceType === "babysitting";
@@ -84,7 +84,6 @@ const BookingConfirmation = props => {
           methodPaymentSelected
         )
         .then(data => {
-          ;
           props.history.push("/payment-success");
         })
         .catch(err => err);
@@ -93,15 +92,18 @@ const BookingConfirmation = props => {
 
   return (
     <form className="booking-confirmation wrapper" onSubmit={handleSubmit}>
-      {selectedMaid !== null || selectedMaid !== undefined ? (
+      {props.selectedMaid !== undefined ? (
         <>
-          <h2>Prestation : {serviceType}</h2>
           <div className="booking-confirmation--recap">
             <div className="header">
               <p className="service-name">{serviceType}</p>
               <div className="service-date">
-                <p>{selectedDate.toLocaleTimeString()}</p>
-                <p>{selectedDate.toLocaleDateString()}</p>
+                {!!selectedDate && (
+                  <>
+                    <p>{selectedDate.toLocaleTimeString()}</p>
+                    <p>{selectedDate.toLocaleDateString()}</p>
+                  </>
+                )}
               </div>
             </div>
             <div className="service-detail">
@@ -177,17 +179,17 @@ const BookingConfirmation = props => {
           </div>
         </>
       ) : (
-        <>
+        <div className="alignCenter">
           <p>
             Ooops... Pas si vite, il faut chercher avant de trouver le bon{" "}
             <FontAwesomeIcon icon={faLemon} />
           </p>
-          <p>
+          <p className="alignCenter">
             <a href="/" className="btn-cta">
               Choisir un service
             </a>
           </p>
-        </>
+        </div>
       )}
     </form>
   );

@@ -7,18 +7,17 @@ import RatedProfil from "../rated-profil/rated-profil";
 import ServiceItem from "../services-list/service-item";
 import NavBar from "../nav-bar/nav-bar";
 
-import Popin from "../Popin.js";
-
 import "../../styles/home.scss";
 import "./auth.scss";
 
 const Homepage = ({ user, history }) => {
+  
   const [maids, setMaids] = useState([]);
   const [cookingServiceSelected, setCOOKINGServiceSelected] = useState();
   const [serviceSelected, setServiceSelected] = useState();
   const [displayCookingForm, setDisplayCookingForm] = useState(false);
   const [isUserNotLoadded, setIsUserNotLoadded] = useState(false);
-
+  
   useEffect(() => {
     if (isEmpty(user)) {
       setIsUserNotLoadded(true);
@@ -51,9 +50,9 @@ const Homepage = ({ user, history }) => {
 
   return (
     <>
-      {/*isUserNotLoadded ? (
+      {isUserNotLoadded ? (
         <Redirect to="/login" />
-      ) : (*/}
+      ) : (
       <>
         <div className="welcome">
           <p>
@@ -112,6 +111,7 @@ const Homepage = ({ user, history }) => {
         </div>
         <NavBar />
       </>
+      )}
     </>
   );
 };

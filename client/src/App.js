@@ -3,15 +3,21 @@ import "./App.scss";
 
 import { Switch, Route } from "react-router-dom";
 
+import NavTop from "./components/nav-top/nav-top";
 import Homepage from "./components/auth/Homepage.js";
 import Signup from "./components/auth/Signup.js";
 import SignupMaid from "./components/auth/SignupMaid.js";
 import Login from "./components/auth/Login.js";
 import LoginMaid from "./components/auth/LoginMaid.js";
+
 import Profile from "./components/auth/Profile.js";
+import ProfileMaid from "./components/auth/ProfileMaid.js";
+
 import FormCookingService from "./components/form/form-service/form-cooking-service";
+
 import Booking from "./components/booking/booking";
 import BookingConfirmation from "./components/booking/booking-confirmation";
+
 import Payment from "./components/payment/payment";
 import PaymentSucess from "./components/payment-success/payment-success";
 
@@ -23,22 +29,19 @@ class App extends Component {
     user: {},
     maids: [], //liste des maids quand un user est loggué
     maidLogged: {}, //lorsqu'un maid se loggue
-    selectedService: {},
-    selectedMaid: {}
+    selectedService: {}, //service selectionné
+    selectedMaid: {}, // maid sélectionné
+    currentPageName: "LemonMaid"
   };
 
-  componentDidMount() {
-    maidService
-      .getMaid()
-      .then(data => this.setState({ maids: data }))
-      .catch(err => this.setState({ user: {} }));
-  }
-
   fetchUser = () => {
+    
     if (!this.state.user._id) {
+      
       authService
         .loggedin()
-        .then(data => this.setState({ user: data }))
+        .then(data => {
+          this.setState({ user: data.user })})
         .catch(err => this.setState({ user: false }));
     } else {
       console.log("user already in the state");
@@ -52,8 +55,15 @@ class App extends Component {
         .then(data => this.setState({ maidLogged: data }))
         .catch(err => this.setState({ maidLogged: false }));
     } else {
-      console.log("user already in the state");
+      console.log("maid already in the state");
     }
+  };
+
+  fetchGetMaid = () => {
+    maidService
+      .getMaid()
+      .then(data => this.setState({ maids: data }))
+      .catch(err => this.setState({ user: {} }));
   };
 
   updateUser = data => {
@@ -69,18 +79,21 @@ class App extends Component {
   };
 
   updateSelectedService = data => {
-    ;
     this.setState({ selectedService: data });
   };
 
   updateSelectedMaid = data => {
-    ;
     this.setState({ selectedMaid: data });
+  };
+
+  getCurrentPageName = currentPageName => {
+    this.setState({ currentPageName });
   };
 
   componentDidMount() {
     this.fetchUser();
     this.fetchMaid();
+    this.fetchGetMaid();
   }
 
   render() {
@@ -90,6 +103,11 @@ class App extends Component {
           <div className="App" data-route={props.location.pathname}>
             {" "}
             {/* data-route="/" allow us to style pages */}
+            <NavTop
+              user={this.state.user}
+              currentPageName={this.state.currentPageName}
+              history={props.history}
+            />
             <Switch>
               <Route
                 exact
@@ -133,7 +151,10 @@ class App extends Component {
                 exact
                 path="/login-maid"
                 render={props => (
-                  <LoginMaid updateMaid={this.updateMaid} history={props.history} />
+                  <LoginMaid
+                    updateMaid={this.updateMaid}
+                    history={props.history}
+                  />
                 )}
               />
 
@@ -151,12 +172,27 @@ class App extends Component {
 
               <Route
                 exact
+                path="/maid-profil/:id"
+                render={props => (
+                  <ProfileMaid
+                    maids={this.state.maids}
+                    updateMaid={this.updateMaid}
+                    history={props.history}
+                    currentPageName={this.getCurrentPageName}
+                  />
+                )}
+              />
+
+              <Route
+                exact
                 path="/cooking-service"
                 render={props => (
                   <FormCookingService
                     history={props.history}
                     updateMaid={this.updateMaidsDisplayForServiceSelected}
                     selectedService={this.updateSelectedService}
+                    user={this.state.user}
+                    currentPageName={this.getCurrentPageName}
                   />
                 )}
               />
@@ -170,6 +206,7 @@ class App extends Component {
                     maids={this.state.maids}
                     selectedService={this.state.selectedService}
                     selectedMaid={this.updateSelectedMaid}
+                    currentPageName={this.getCurrentPageName}
                   />
                 )}
               />
@@ -183,6 +220,7 @@ class App extends Component {
                     selectedService={this.state.selectedService}
                     selectedMaid={this.state.selectedMaid}
                     user={this.state.user}
+                    currentPageName={this.getCurrentPageName}
                   />
                 )}
               />

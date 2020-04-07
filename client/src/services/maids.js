@@ -121,15 +121,21 @@ export default {
         rate
       })
       .then(response => response.data);
-  }
+  },
 
-  /*loggedin() {
-    return this.service.get('/loggedin')
-      .then(response => response.data)
+  getUrl(url) {
+    return this.service
+      .get(url)
+      .then(response => response.data);
   },
 
   logout() {
     return this.service.get('/logout', {})
+      .then(response => response.data)
+  },
+  
+  /*loggedin() {
+    return this.service.get('/loggedin')
       .then(response => response.data)
   },
 

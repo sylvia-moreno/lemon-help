@@ -3,7 +3,7 @@ const router = express.Router();
 const CookingService = require("../models/CookingService");
 const User = require("../models/User");
 
-router.post("/payment", async (req, res, next) => {
+router.post("/booking-confirmation", async (req, res, next) => {
   const foodType = req.body.foodType;
   const foodPreference = req.body.foodPreference;
   const mealType = req.body.mealType;
@@ -25,38 +25,33 @@ router.post("/payment", async (req, res, next) => {
     date,
     maid,
     client,
-    status,
+    status
   });
 
   newCookingService.save();
 
-  CookingService.findOne({'client': userID })
-  .then((service) => {
-    console.log('service', service)
-    User.findOneAndUpdate(
-      { _id: userID },
-      {$push: {"services": service}},
-    )
-    //.populate({path: 'services', model: newCookingService})
-    .then(user => {
-      console.log('user', user)
+  CookingService.findOne({ client: userID }).then(service => {
+    console.log("service", service);
+    User.findOneAndUpdate({ _id: userID }, { $push: { services: service } })
+      //.populate({path: 'services', model: newCookingService})
+      .then(user => {
+        console.log("user", user);
 
-      //user.services.push(service);
-      console.log('user', user)
-      res.status(201).json("le service a été ajouté au user");
-    })
+        //user.services.push(service);
+        console.log("user", user);
+        res.status(201).json("le service a été ajouté au user");
+      })
 
-    .catch(err => {
-      res.status(500).json({
-        message: err,
-        err
+      .catch(err => {
+        res.status(500).json({
+          message: err,
+          err
+        });
       });
-    });
-  })
+  });
 
   //res.status(403).json({message: 'le service nexiste pas'});
 });
-
 
 router.get("/payment-success", (req, res) => {
   req.logout();

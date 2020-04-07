@@ -1,8 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import "./capsule-button.scss";
 
 const CapsuleButtonIcon = (props) => {

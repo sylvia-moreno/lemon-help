@@ -1,17 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLemon } from "@fortawesome/free-solid-svg-icons";
 
-import maidService from "../../services/maids";
-
 import "./card-profil.scss";
 
-const CardProfil = (props) => {
-  ;
+const CardProfil = props => {
   const handleSubmit = event => {
     event.preventDefault();
     props.selectedMaid(props.maid);
+    
     props.history.push("/booking-confirmation");
   };
   return (
@@ -37,7 +36,7 @@ const CardProfil = (props) => {
             </div>
             <div className="container">
               <div className="rating">
-                Note: 
+                Note:
                 <span className="rating-number">{props.maid.rating}</span>
                 <FontAwesomeIcon icon={faLemon} />
               </div>
@@ -45,12 +44,12 @@ const CardProfil = (props) => {
           </div>
           <div className="block">
             <div className="container-cta">
-              <a
-                href={`/maids-profil/${props.maid._id}`}
+              <Link
+                to={`/maid-profil/${props.maid.id}`}
                 className="bta-link--NoBg container-show-profil"
               >
                 Voir son profil
-              </a>
+              </Link>
               <button
                 className="bta-link--Bg container-selected"
                 onClick={handleSubmit}

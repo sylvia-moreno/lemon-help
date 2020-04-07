@@ -269,7 +269,7 @@ export default class extends React.Component {
               <input
                 type="text"
                 name="rate"
-                value={this.state.rate}
+                value={this.state.rating}
                 onChange={this.handleChange}
                 placeholder="Quel est votre numbre de point ? "
               />

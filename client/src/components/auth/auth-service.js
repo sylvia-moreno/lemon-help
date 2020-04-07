@@ -28,6 +28,7 @@ export default {
   },
 
   loggedin() {
+    
     return this.service.get("/loggedin").then(response => response.data);
   },
 

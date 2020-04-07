@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import CardProfil from "../card-profil/card-profil";
 
 import "./booking.scss";
 
 const Booking = (props) => {
-  ;
+
+  useEffect(() => {
+    props.currentPageName("Réservation");
+  }, []);
 
   const goBack = () => {
     props.history.goBack();
