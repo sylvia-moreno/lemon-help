@@ -269,7 +269,7 @@ export default class extends React.Component {
               <input
                 type="text"
                 name="rate"
-                value={this.state.rating}
+                value={this.state.rate}
                 onChange={this.handleChange}
                 placeholder="Quel est votre numbre de point ? "
               />
@@ -329,6 +329,7 @@ export default class extends React.Component {
             <label>
               <textarea
                 type="text"
+                name="curriculumvitae"
                 value={this.state.curriculumvitae}
                 onChange={this.handleChange}
                 placeholder="Dites nous en plus sur votre expérience ..."
