@@ -7,7 +7,7 @@ import "./booking-payment-item.scss";
 
 
 const BookingPaymentItem = ({ label, icon, methodName, hasChecked }) => {
-    debugger
+    
   const [isChecked, setIsChecked] = useState(false);
   const [checked, setChecked] = React.useState(false);
 

@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600|Nunito:600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
 
 @import "./styles/home.scss";
 
 $FONT1: "Nunito", sans-serif;
 $FONT2: "Nunito Sans", sans-serif;
+$FONT3: "PT Sans", sans-serif;
 
 body {
   font-family: $FONT2;
@@ -18,6 +20,12 @@ body {
   justify-content: center;
   background: #fcc434;
   flex-direction: column;
+  position: relative;
+}
+
+.alignCenter {
+  display: flex;
+  justify-content: center;
 }
 
 .wrapper {
@@ -285,6 +293,21 @@ a.btn {
   }
 }
 
-.MuiCheckbox-colorSecondary.Mui-checked {
-  color: #fcc434;
+.cta-link {
+  margin-top: 30px;
+  a {
+    font-size: 10px;
+    color: #000;
+  }
 }
+
+.MuiCheckbox-colorSecondary {
+  &:hover {
+    background-color: #fcc4341c !important;
+  }
+  .Mui-checked {
+    color: #fcc434 !important;
+  }
+}
+
+

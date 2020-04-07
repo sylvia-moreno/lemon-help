@@ -3,9 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import IconHeaderMaids from "../icons/icon-header-maids";
-import authService from "./auth-service.js";
 
-import './auth.scss';
+import maidService from "../../services/maids";
+
+import "./auth.scss";
 
 export default class extends React.Component {
   state = {
@@ -18,12 +19,12 @@ export default class extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    authService
+    maidService
       .login(this.state.username, this.state.password)
       .then(response => {
         this.setState({ error: "" });
 
-        this.props.updateUser(response);
+        this.props.updateMaid(response);
         this.props.history.push("/");
       })
       .catch(err => this.setState({ error: err.response.data.message }));
@@ -36,7 +37,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <form className="login" onSubmit={this.handleSubmit}>
+      <form className="login login-maid" onSubmit={this.handleSubmit}>
         <div className="login-logo">
           <h1 className="logo">LemonMaid</h1>
           <div className="icons">
@@ -52,7 +53,7 @@ export default class extends React.Component {
               <p>{this.state.error}</p>
             </div>
           )}
-          <h2>Identification</h2>
+          <h2>Identification LemonMaider</h2>
           <p>
             <label>
               <input
@@ -80,11 +81,9 @@ export default class extends React.Component {
             SE CONNECTER
           </button>
           <div className="bta-link--NoBg">
-          <Link to="/signup">Vous n'avez pas de compte ? Inscrivez-vous</Link>
-          </div>
-
-          <div className="cta-link">
-            <Link to="/signup-maid">Vous souhaitez travailler avec nous ? Inscrivez-vous</Link>
+            <Link to="/signup-maid">
+              Vous n'avez pas de compte ? Inscrivez-vous
+            </Link>
           </div>
         </div>
       </form>

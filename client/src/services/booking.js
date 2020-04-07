@@ -16,8 +16,9 @@ export default {
     selectedMaid,
     userID,
     status,
+    methodPaymentSelected,
   ) {
-    debugger;
+    ;
     return this.service
       .post("/booking-confirmation", {
         foodType,
@@ -29,6 +30,7 @@ export default {
         selectedMaid,
         userID,
         status,
+        methodPaymentSelected,
       })
       .then(response => response.data);
   }

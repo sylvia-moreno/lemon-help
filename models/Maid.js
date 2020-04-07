@@ -24,7 +24,7 @@ const maidSchema = new Schema({
   services: Array,
   requirements :String,
   curriculumvitae: String,
-  rate: String,
+  rate: String, //tarif
   //ajout des documents de casier judiciaires, pièces d'identité
 }, {
   timestamps: {

@@ -5,13 +5,15 @@ import { Switch, Route } from "react-router-dom";
 
 import Homepage from "./components/auth/Homepage.js";
 import Signup from "./components/auth/Signup.js";
+import SignupMaid from "./components/auth/SignupMaid.js";
 import Login from "./components/auth/Login.js";
+import LoginMaid from "./components/auth/LoginMaid.js";
 import Profile from "./components/auth/Profile.js";
 import FormCookingService from "./components/form/form-service/form-cooking-service";
 import Booking from "./components/booking/booking";
 import BookingConfirmation from "./components/booking/booking-confirmation";
 import Payment from "./components/payment/payment";
-import LandingPage from "./components/landing-page/landing-page";
+import PaymentSucess from "./components/payment-success/payment-success";
 
 import authService from "./components/auth/auth-service.js";
 import maidService from "./services/maids";
@@ -19,7 +21,8 @@ import maidService from "./services/maids";
 class App extends Component {
   state = {
     user: {},
-    maids: [],
+    maids: [], //liste des maids quand un user est loggué
+    maidLogged: {}, //lorsqu'un maid se loggue
     selectedService: {},
     selectedMaid: {}
   };
@@ -42,8 +45,23 @@ class App extends Component {
     }
   };
 
+  fetchMaid = () => {
+    if (!!this.state.maid && !this.state.maid._id) {
+      maidService
+        .loggedinMaid()
+        .then(data => this.setState({ maidLogged: data }))
+        .catch(err => this.setState({ maidLogged: false }));
+    } else {
+      console.log("user already in the state");
+    }
+  };
+
   updateUser = data => {
     this.setState({ user: data });
+  };
+
+  updateMaid = data => {
+    this.setState({ maidLogged: data });
   };
 
   updateMaidsDisplayForServiceSelected = data => {
@@ -51,17 +69,18 @@ class App extends Component {
   };
 
   updateSelectedService = data => {
-    debugger;
+    ;
     this.setState({ selectedService: data });
   };
 
   updateSelectedMaid = data => {
-    debugger;
+    ;
     this.setState({ selectedMaid: data });
   };
 
   componentDidMount() {
     this.fetchUser();
+    this.fetchMaid();
   }
 
   render() {
@@ -93,9 +112,28 @@ class App extends Component {
 
               <Route
                 exact
+                path="/signup-maid"
+                render={props => (
+                  <SignupMaid
+                    updateMaid={this.updateMaid}
+                    history={props.history}
+                  />
+                )}
+              />
+
+              <Route
+                exact
                 path="/login"
                 render={props => (
                   <Login updateUser={this.updateUser} history={props.history} />
+                )}
+              />
+
+              <Route
+                exact
+                path="/login-maid"
+                render={props => (
+                  <LoginMaid updateMaid={this.updateMaid} history={props.history} />
                 )}
               />
 
@@ -108,14 +146,6 @@ class App extends Component {
                     updateUser={this.updateUser}
                     history={props.history}
                   />
-                )}
-              />
-
-              <Route
-                exact
-                path="/landing-page"
-                render={props => (
-                  <LandingPage history={props.history} user={this.state.user} />
                 )}
               />
 
@@ -157,7 +187,7 @@ class App extends Component {
                 )}
               />
 
-              <Route
+              {/*<Route
                 exact
                 path="/payment"
                 render={props => (
@@ -168,7 +198,13 @@ class App extends Component {
                     user={this.state.user}
                   />
                 )}
-                />
+                />*/}
+
+              <Route
+                exact
+                path="/payment-success"
+                render={props => <PaymentSucess />}
+              />
 
               {/* last route, ie: 404 */}
               <Route render={() => <h1>Not Found</h1>} />

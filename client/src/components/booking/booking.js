@@ -5,7 +5,7 @@ import CardProfil from "../card-profil/card-profil";
 import "./booking.scss";
 
 const Booking = (props) => {
-  debugger;
+  ;
 
   const goBack = () => {
     props.history.goBack();

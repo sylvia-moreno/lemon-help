@@ -1,8 +1,10 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
 import authService from "./auth-service.js";
+import uploadFileService from "../../services/upload-file";
+
+
 import IconHeaderMaids from "../icons/icon-header-maids";
 
 import './auth.scss';
@@ -16,9 +18,23 @@ export default class extends React.Component {
     cityName: "",
     cityCode: "",
     country: "",
-    //gender: "",
+    imageProfil: "",
 
     error: ""
+  };
+
+  handleFileChange = event => {
+    const uploadData = new FormData();
+    uploadData.append("imageProfil", event.target.files[0]);
+
+    uploadFileService
+      .handleUploadFile(uploadData)
+      .then(response => {
+        this.setState({ imageProfil: response.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
   };
 
   handleSubmit = event => {
@@ -33,7 +49,8 @@ export default class extends React.Component {
         this.state.address,
         this.state.cityName,
         this.state.cityCode,
-        this.state.country
+        this.state.country,
+        this.state.imageProfil,
       )
       .then(() => {
         this.setState({ error: "" });
@@ -47,11 +64,11 @@ export default class extends React.Component {
             this.state.address,
             this.state.cityName,
             this.state.cityCode,
-            this.state.country
-            //this.state.gender,
+            this.state.country,
+            this.state.imageProfil,
           )
           .then(response => {
-            debugger;
+            ;
             this.setState({ error: "" });
 
             this.props.updateUser(response);
@@ -172,11 +189,26 @@ export default class extends React.Component {
             </label>
           </p>
 
+          <p>
+            <label>
+              <input
+                type="file"
+                onChange={this.handleFileChange}
+                placeholder="Votre photo de profil"
+              />
+            </label>
+          </p>
+
           <button className="btn-cta" onClick={this.handleSubmit}>
             Créer un compte
           </button>
           <div className="bta-link--NoBg">
           <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
+          </div>
+
+
+          <div className="cta-link">
+            <Link to="/login-maid">Vous travaillez avec nous ? Connectez-vous</Link>
           </div>
         </div>
       </form>

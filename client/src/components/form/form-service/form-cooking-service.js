@@ -233,9 +233,11 @@ const FormCookingService = ({ history, updateMaid, selectedService }) => {
         </div>
       </MuiPickersUtilsProvider>
 
-      <button className="btn-cta" onClick={handleSubmit}>
-        Rechercher
-      </button>
+      <div className="alignCenter">
+        <button className="btn-cta" onClick={handleSubmit}>
+          Rechercher
+        </button>
+      </div>
     </form>
   );
 };

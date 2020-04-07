@@ -1,0 +1,21 @@
+.payment-success {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  &--title {
+    font-size: 20px;
+  }
+
+  &--icon {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 70px;
+  }
+}

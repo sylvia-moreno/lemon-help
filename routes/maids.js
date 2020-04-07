@@ -2,12 +2,13 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const Maid = require("../models/Maid");
+const uploader = require('../configs/cloudinary-setup.js');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-router.post("/login", (req, res, next) => {
+router.post("/login-maid", (req, res, next) => {
   passport.authenticate("local", (err, theMaid, failureDetails) => {
     if (err) {
       res.status(500).json({message: 'Something went wrong authenticating Maid'});
@@ -32,35 +33,38 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/signup", (req, res, next) => {
-  debugger
-  const email = req.body.email;
-  const password = req.body.password;
+router.post("/signup-maid", (req, res, next) => {
   const username = req.body.username;
-  const imageProfil = req.body.imageProfil;
-  const phoneNumber = req.body.phoneNumber;
+  const password = req.body.password;
+  const email = req.body.email;
   const address = req.body.address;
   const cityName = req.body.cityName;
   const cityCode = req.body.cityCode;
   const country = req.body.country;
-  const experience = req.body.experience;   
-  const rating = req.body.rating;   
-  const gender = req.body.gender;   
-  const services = req.body.services;   
-  const curriculumvitae = req.body.curriculumvitae;   
-  const foodPractice = req.body.foodPractice;   
-  const speciality = req.body.speciality;   
-  const listsOfDishs = req.body.listsOfDishs;   
-   
+  const imageProfil = req.body.imageProfil;
+  const phoneNumber = req.body.phoneNumber;
+  const experience = req.body.experience;
+  const profession = req.body.profession;
+  const speciality = req.body.speciality;
+  const foodPractice = req.body.foodPractice;
+  const curriculumvitae = req.body.curriculumvitae;
+  const rate = req.body.rate;
+  const rating = req.body.rating;
+
+  console.log('req body email', email);
 
   if (!email || !password) {
-    res.status(400).json({message: "Indicate email and password"});
+    res
+      .status(400)
+      .json({
+        message: "Veuillez remplir votre email ainsi que votre mot de passe"
+      });
     return;
   }
 
   Maid.findOne({ email }, "email", (err, maid) => {
     if (maid !== null) {
-      res.status(400).json({ message: "The email already exists" });
+      res.status(400).json({ message: err });
       return;
     }
 
@@ -71,37 +75,38 @@ router.post("/signup", (req, res, next) => {
       email,
       password: hashPass,
       username,
-      imageProfil,
-      phoneNumber,
       address,
       cityName,
       cityCode,
       country,
+      imageProfil,
+      phoneNumber,
       experience,
-      rating,  
-      gender,
-      services,
-      curriculumvitae,
-      foodPractice,
+      profession,
       speciality,
-      listsOfDishs,
+      foodPractice,
+      curriculumvitae,
+      rate,
+      rating,
     });
 
-    newMaid.save()
-    .then(() => {
-      debugger
-      req.login(newMaid, (err) => {
-        if (err) {
-          res.status(500).json({message: 'Login after signup went bad.'});
-          return;
-        }
-    
-        res.status(201).json(newMaid);
+    newMaid
+      .save()
+      .then(() => {
+        req.login(newMaid, err => {
+          console.log('new maid', newMaid)
+          if (err) {
+            res.status(500).json({ message:  "Something went wrong: ", err });
+            return;
+          }
+
+          console.log('new maid', newMaid)
+          res.status(201).json(newMaid);
+        });
+      })
+      .catch(err => {
+        res.status(500).json({ message: "Something went wrong: ", err });
       });
-    })
-    .catch(err => {
-      res.status(500).json({message: "Something went wrong"});
-    })
   });
 });
 
@@ -135,10 +140,20 @@ router.get("/", (req, res, next) => {
 });
 
 
+router.get("/loggedin-maid", (req, res, next) => {
+  ;
+  if (req.maid) {
+    ;
+    res.status(200).json({ maid: req.maid });
+    return;
+  }
 
-router.post("/edit", (req, res, next) => {
+  res.status(403).json({ message: "Unauthorized" });
+});
+
+router.post("/edit-maid", (req, res, next) => {
   // Check Maid is logged in
-  if (!req.Maid) {
+  if (!req.maid) {
     res.status(401).json({message: "You need to be logged in to edit your profile"});
     return;
   }
@@ -146,11 +161,11 @@ router.post("/edit", (req, res, next) => {
   // Updating `req.Maid` with each `req.body` field (excluding some internal fields `cannotUpdateFields`)
   const cannotUpdateFields = ['_id', 'password'];
   Object.keys(req.body).filter(key => cannotUpdateFields.indexOf(key) === -1).forEach(key => {
-    req.Maid[key] = req.body[key];
+    req.maid[key] = req.body[key];
   });
 
   // Validating Maid with its new values (see: https://mongoosejs.com/docs/validation.html#async-custom-validators)
-  req.Maid.validate(function (error) {
+  req.maid.validate(function (error) {
     if (error) {
       // see: https://mongoosejs.com/docs/validation.html#validation-errors
       res.status(400).json({message: error.errors});
@@ -158,19 +173,19 @@ router.post("/edit", (req, res, next) => {
     }
 
     // Validation ok, let save it
-    req.Maid.save(function (err) {
+    req.maid.save(function (err) {
       if (err) {
         res.status(500).json({message: 'Error while saving Maid into DB.'});
         return;
       }
 
-      res.status(200).json(req.Maid);
+      res.status(200).json(req.maid);
     })
   });
 });
 
 router.post("/cooking-service", (req, res, next) => {
-  debugger
+  
   const foodType = req.body.foodType;
   const foodPreference = req.body.foodPreference
   const mealType = req.body.mealType;
@@ -191,5 +206,18 @@ router.post("/cooking-service", (req, res, next) => {
         .json({ message: "Something went wrong during maids request", err });
     });
 });
+
+
+router.post('/upload', uploader.single("imageProfil"), (req, res, next) => {
+    // console.log('file is: ', req.file)
+
+    if (!req.file) {
+      next(new Error('No file uploaded!'));
+      return;
+    }
+    // get secure_url from the file object and save it in the 
+    // variable 'secure_url', but this can be any name, just make sure you remember to use the same in frontend
+    res.json({ secure_url: req.file.secure_url });
+})
 
 module.exports = router;

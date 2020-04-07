@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 .login,
-.signup {
+.signup,
+.signup-maid {
   width: 100%;
   background: #fcc434;
   display: flex;
@@ -31,18 +32,17 @@
       margin-bottom: 19px;
     }
 
-      .icons-item {
-        display: flex;
-        background: #fff;
-        padding: 15px;
-        border-top-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        svg {
-          width: 80px;
-          height: 80px;
-        }
+    .icons-item {
+      display: flex;
+      background: #fff;
+      padding: 15px;
+      border-top-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      svg {
+        width: 80px;
+        height: 80px;
       }
-    
+    }
   }
 
   &-form {
@@ -60,7 +60,8 @@
     }
 
     input,
-    select {
+    select,
+    textarea {
       background: #c5c4c336;
       border: none;
       border-radius: 10px;
@@ -69,6 +70,17 @@
       font-family: inherit;
       font-size: inherit;
       color: inherit;
+    }
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      position: relative;
+      background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
+      background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+      background-size: 5px 5px, 5px 5px, 1px 1.5em;
+      background-repeat: no-repeat;
     }
   }
 }
@@ -87,6 +99,7 @@
   }
 }
 .home-page {
+  padding-bottom: 95px;
   &--top-profil {
     background: #e8e8e84a;
     padding: 14px;
@@ -95,8 +108,8 @@
 
   &--promo {
     height: 120px;
-    background: #FAA759;
-    border-radius: 10Px;
+    background: #faa759;
+    border-radius: 10px;
     margin-bottom: 20px;
     position: relative;
     width: 100%;
@@ -112,9 +125,9 @@
     }
     img {
       height: 107px;
-    position: absolute;
-    right: 16px;
-    bottom: 0;
+      position: absolute;
+      right: 16px;
+      bottom: 0;
     }
   }
 

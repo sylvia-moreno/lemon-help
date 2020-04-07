@@ -8,7 +8,7 @@ import maidService from "../../services/maids";
 import "./card-profil.scss";
 
 const CardProfil = (props) => {
-  debugger;
+  ;
   const handleSubmit = event => {
     event.preventDefault();
     props.selectedMaid(props.maid);

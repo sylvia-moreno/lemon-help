@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import serviceCooking from "../../services/booking";
 
 const Payment = props => {
-  debugger;
+  ;
   const [account, setAccount] = useState();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Payment = props => {
           status
         )
         .then(data => {
-          debugger;
+          ;
           props.history.push("/payment-success");
         })
         .catch(err => err);

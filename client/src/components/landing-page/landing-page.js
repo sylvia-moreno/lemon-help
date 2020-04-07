@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 
 const LandingPage = ({history, user}) => {
-  debugger
+  
   useEffect(() => {
     if(!Object.entries(user).length === 0) {
-      debugger
+      
       history.push('/')
     }
     

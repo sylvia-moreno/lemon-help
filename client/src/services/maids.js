@@ -20,13 +20,105 @@ export default {
   },
 
   getSpecificMaid(foodType, foodPreference, mealType, serviceType) {
-    debugger;
+    ;
     return this.service
       .post("/cooking-service", {
         foodType,
         foodPreference,
         mealType,
         serviceType
+      })
+      .then(response => response.data);
+  },
+
+  //signup maid
+  signupMaid(
+    email,
+    password,
+    username,
+    address,
+    cityName,
+    cityCode,
+    country,
+    imageProfil,
+    phoneNumber,
+    experience,
+    profession,
+    speciality,
+    foodPractice,
+    curriculumvitae,
+    rating,
+    rate
+  ) {
+    return this.service
+      .post("/signup-maid", {
+        email,
+        password,
+        username,
+        address,
+        cityName,
+        cityCode,
+        country,
+        imageProfil,
+        phoneNumber,
+        experience,
+        profession,
+        speciality,
+        foodPractice,
+        curriculumvitae,
+        rating,
+        rate
+      })
+      .then(response => response.data);
+  },
+
+  loggedinMaid() {
+    return this.service.get("/loggedin-maid").then(response => response.data);
+  },
+
+  login(username, password) {
+    return this.service
+      .post("/login-maid", { username, password })
+      .then(response => response.data);
+  },
+
+  //edit maid
+  editMaid(
+    email,
+    password,
+    username,
+    address,
+    cityName,
+    cityCode,
+    country,
+    imageProfil,
+    phoneNumber,
+    experience,
+    profession,
+    speciality,
+    foodPractice,
+    curriculumvitae,
+    rating,
+    rate
+  ) {
+    return this.service
+      .post("/edit-maid", {
+        email,
+        password,
+        username,
+        address,
+        cityName,
+        cityCode,
+        country,
+        imageProfil,
+        phoneNumber,
+        experience,
+        profession,
+        speciality,
+        foodPractice,
+        curriculumvitae,
+        rating,
+        rate
       })
       .then(response => response.data);
   }

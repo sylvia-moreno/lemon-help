@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import serviceCooking from "../../services/booking";
+import BookingPaymentItem from "./booking-payment-item";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLemon } from "@fortawesome/free-solid-svg-icons";
@@ -9,12 +12,20 @@ import IconHand from "../icons/icon-hand";
 
 import "./booking.scss";
 import "../form/radio-button-icon/radio-button-icon.scss";
-import BookingPaymentItem from "./booking-payment-item";
 
 const BookingConfirmation = props => {
-  debugger;
+  ;
   const [hasChecked, setHasChecked] = useState(false);
   const [methodPaymentSelected, setMethodPaymentSelected] = useState("");
+  const [account, setAccount] = useState();
+
+  useEffect(() => {
+    const priceService =
+      props.serviceType === "cuisine" ? props.selectedMaid.rate : 0;
+    const price = priceService * props.selectedService.numberOfClient;
+    const pourcent = (price * 10) / 100;
+    setAccount(price + pourcent);
+  }, []);
 
   const {
     foodType,
@@ -32,6 +43,7 @@ const BookingConfirmation = props => {
   const COOKING = serviceType === "cuisine";
   const CLEANING = serviceType === "ménage";
   const BABYSITTING = serviceType === "babysitting";
+  const status = "pending";
 
   const paymentMethods = [
     {
@@ -57,7 +69,26 @@ const BookingConfirmation = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.history.push("/payment");
+    if (COOKING) {
+      serviceCooking
+        .bookingCookingService(
+          foodType,
+          foodPreference,
+          mealType,
+          serviceType,
+          numberOfClient,
+          selectedDate,
+          props.selectedMaid,
+          props.user._id,
+          status,
+          methodPaymentSelected
+        )
+        .then(data => {
+          ;
+          props.history.push("/payment-success");
+        })
+        .catch(err => err);
+    }
   };
 
   return (
@@ -84,7 +115,9 @@ const BookingConfirmation = props => {
                       <strong>{foodType}</strong> pour{" "}
                       <strong>{numberOfClient} personne(s)</strong>
                     </p>
-                    <p>préparé par <strong>{username}</strong></p>
+                    <p>
+                      préparé par <strong>{username}</strong>
+                    </p>
                   </>
                 ) : (
                   <div>ddd</div>
@@ -92,50 +125,22 @@ const BookingConfirmation = props => {
               </p>
             </div>
           </div>
-          <ul className="booking-confirmation--recap">
-            <li>
-              <span className="label">Votre lemonMaid</span>
-              <span className="name">{username}</span>
-            </li>
-            {COOKING ? (
-              <>
-                <li>
-                  <span className="label">Pratique alimentaire</span>
-                  <span className="name">{foodPreference}</span>
-                </li>
-                <li>
-                  <span className="label">Type de cuisine</span>
-                  <span className="name">{foodType}</span>
-                </li>
-                <li>
-                  <span className="label">Type de repas</span>
-                  <span className="name">{mealType}</span>
-                </li>
-                <li>
-                  <span className="label">Nombre de client</span>
-                  <span className="name">{numberOfClient}</span>
-                </li>
-                <li>
-                  <span className="label">Pour le </span>
-                  <span className="name">
-                    {selectedDate.toLocaleDateString()}
-                  </span>
-                </li>
-                <li>
-                  <span className="label">A</span>
-                  <span className="name">
-                    {selectedDate.toLocaleTimeString()}
-                  </span>
-                </li>
-              </>
-            ) : (
-              <li>
-                <span className="label"></span>
-                <span className="name"></span>
-              </li>
-            )}
-          </ul>
+
+          <div className="booking-confirmation--paiement">
+            <p className="title">Paiement</p>
+            {paymentMethods.map((method, i) => (
+              <BookingPaymentItem
+                label={method.label}
+                icon={method.icon}
+                methodName={method.code}
+                hasChecked={handleCheckMethodPayment}
+                key={i}
+              />
+            ))}
+          </div>
+
           <div className="booking-confirmation--promo-code">
+            <p className="title">Code promo</p>
             <div className="radio-button-icon">
               <div className="radio-button-icon--icon">
                 <IconPromoCode />
@@ -151,21 +156,25 @@ const BookingConfirmation = props => {
               </label>
             </div>
           </div>
-          <div className="booking-confirmation--paiement">
-            <p className="title">Paiement</p>
-            {paymentMethods.map((method, i) => (
-              <BookingPaymentItem
-                label={method.label}
-                icon={method.icon}
-                methodName={method.code}
-                hasChecked={handleCheckMethodPayment}
-                key={i}
-              />
-            ))}
+
+          <div className="booking-confirmation--total">
+            <ul className="booking-confirmation--total-list">
+              <li className="item">
+                <span className="label">Total</span>
+                <span>{account}</span>
+              </li>
+              <li className="item">
+                <span className="label">Frais de déplacement</span>
+                <span>Gratuit</span>
+              </li>
+            </ul>
           </div>
-          <button className="btn-cta" onClick={handleSubmit}>
-            Valider et payer
-          </button>
+
+          <div className="alignCenter">
+            <button className="btn-cta" onClick={handleSubmit}>
+              Valider et payer
+            </button>
+          </div>
         </>
       ) : (
         <>

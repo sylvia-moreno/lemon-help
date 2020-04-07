@@ -15,7 +15,7 @@ const icons = {
 };
 
 const SelectCheckbox = props => {
-  debugger;
+  ;
   return (
     <div
       className={classNames("select-checkbox", {

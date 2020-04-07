@@ -53,13 +53,14 @@ router.post("/payment", async (req, res, next) => {
       });
     });
   })
-  
 
   //res.status(403).json({message: 'le service nexiste pas'});
 });
 
-/*router.post("/proceed", (req, res, next) => {
-    const serviceName = req.body.serviceName;
-})*/
+
+router.get("/payment-success", (req, res) => {
+  req.logout();
+  res.status(204).send();
+});
 
 module.exports = router;

@@ -1,5 +1,3 @@
-// components/auth/auth-service.js
-
 import axios from "axios";
 
 export default {
@@ -14,7 +12,7 @@ export default {
       .then(response => response.data);
   },
 
-  signup(email, password, username, address, cityName, cityCode, country) {
+  signup(email, password, username, address, cityName, cityCode, country, imageProfil) {
     return this.service
       .post("/signup", {
         email,
@@ -23,7 +21,8 @@ export default {
         address,
         cityName,
         cityCode,
-        country
+        country,
+        imageProfil,
       })
       .then(response => response.data);
   },
@@ -36,7 +35,7 @@ export default {
     return this.service.get("/logout", {}).then(response => response.data);
   },
 
-  edit(email, password, username, address, cityName, cityCode, country) {
+  edit(email, password, username, address, cityName, cityCode, country, imageProfil) {
     return this.service
       .post("/edit", {
         email,
@@ -45,8 +44,9 @@ export default {
         address,
         cityName,
         cityCode,
-        country
+        country, 
+        imageProfil,
       })
       .then(response => response.data);
-  }
+  },
 };
