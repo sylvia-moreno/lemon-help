@@ -268,7 +268,7 @@ export default class extends React.Component {
             <label>
               <input
                 type="text"
-                name="rate"
+                name="rating"
                 value={this.state.rating}
                 onChange={this.handleChange}
                 placeholder="Quel est votre numbre de point ? "
