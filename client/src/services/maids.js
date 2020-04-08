@@ -19,13 +19,13 @@ export default {
     return this.service.get("/").then(response => response.data);
   },
 
-  getSpecificMaid(foodType, foodPreference, mealType, serviceType) {
+  getSpecificMaid(foodType, foodPreference, /*mealType,*/ serviceType) {
     ;
     return this.service
       .post("/cooking-service", {
         foodType,
         foodPreference,
-        mealType,
+        //mealType,
         serviceType
       })
       .then(response => response.data);

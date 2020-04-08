@@ -5,8 +5,6 @@ const dishSchema = new Schema({
   name: String,
   type: Array,
   price: String,
-  img: String,
-
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -1,11 +1,16 @@
 .nav-bar {
-  position: absolute;
+  position: fixed;
   background: #f9f9f9;
   width: 100%;
   bottom: 0;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   border-top: 1px solid #e6e3e3;
+  box-shadow: 1px 2px 5px 0px #6565656e;
+  z-index: 10;
+  &--notVisible {
+    display: none;
+  }
   &--list {
     list-style: none;
     display: flex;
@@ -20,19 +25,28 @@
       align-items: center;
       font-size: 10px;
       text-decoration: none;
-      color: #a4a3a3;
+      color: #2a2a2a;
       svg {
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
         margin-bottom: 7px;
-        fill: #a4a3a3;
+        fill: #2a2a2a;
       }
       .isSelected,
       &:hover {
-        color: #000;
+        color: #faa759;
         svg {
-            fill: #000;
+          fill: #faa759;
         }
+      }
+    }
+  }
+
+  &--item--isSelected {
+    a {
+      color: #faa759;
+      svg {
+        fill: #faa759;
       }
     }
   }

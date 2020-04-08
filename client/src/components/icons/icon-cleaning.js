@@ -7,8 +7,8 @@ const IconCleaning = props => (
     width="512"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g id="Page-1" fill="none" fill-rule="evenodd">
-      <g id="020---Cleaning-Products" fill-rule="nonzero">
+    <g id="Page-1" fill="none" fillRule="evenodd">
+      <g id="020---Cleaning-Products" fillRule="nonzero">
         <path
           id="Shape"
           d="m58 3v6c-.0032948 1.1032019-.8967981 1.9967052-2 2h-14.35c-.5559367-.0017831-1.1097368-.0689104-1.65-.2v-9.6c.5402632-.13108961 1.0940633-.19821689 1.65-.2h14.35c1.1032019.0032948 1.9967052.89679813 2 2z"

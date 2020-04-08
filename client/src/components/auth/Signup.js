@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import authService from "./auth-service.js";
 import uploadFileService from "../../services/upload-file";
 
-
 import IconHeaderMaids from "../icons/icon-header-maids";
 
-import './auth.scss';
+import "./auth.scss";
 
 export default class extends React.Component {
   state = {
@@ -50,7 +49,7 @@ export default class extends React.Component {
         this.state.cityName,
         this.state.cityCode,
         this.state.country,
-        this.state.imageProfil,
+        this.state.imageProfil
       )
       .then(() => {
         this.setState({ error: "" });
@@ -65,10 +64,9 @@ export default class extends React.Component {
             this.state.cityName,
             this.state.cityCode,
             this.state.country,
-            this.state.imageProfil,
+            this.state.imageProfil
           )
           .then(response => {
-            ;
             this.setState({ error: "" });
 
             this.props.updateUser(response);
@@ -90,20 +88,20 @@ export default class extends React.Component {
         <div className="login-logo">
           <h1 className="logo">LemonMaid</h1>
           <div className="icons">
-            <span className="icons-item"><IconHeaderMaids /></span>
+            <span className="icons-item">
+              <IconHeaderMaids />
+            </span>
           </div>
-          <p className="label">
-            La recette d'une vie plus facile
-          </p>
+          <p className="label">La recette d'une vie plus facile</p>
         </div>
         <div className="login-form">
           {this.state.error && (
-            <div className="mea-error">
+            <div id="mea-error">
               <p>{this.state.error}</p>
             </div>
           )}
 
-          <h2>Identification</h2>
+          <h2>Création de compte</h2>
           <p>
             <label>
               <input
@@ -188,7 +186,7 @@ export default class extends React.Component {
               </select>
             </label>
           </p>
-
+          {/* 
           <p>
             <label>
               <input
@@ -198,17 +196,18 @@ export default class extends React.Component {
               />
             </label>
           </p>
-
+*/}
           <button className="btn-cta" onClick={this.handleSubmit}>
             Créer un compte
           </button>
           <div className="bta-link--NoBg">
-          <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
+            <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
           </div>
 
-
           <div className="cta-link">
-            <Link to="/login-maid">Vous travaillez avec nous ? Connectez-vous</Link>
+            <Link to="/login-maid">
+              Vous travaillez avec nous ? Connectez-vous
+            </Link>
           </div>
         </div>
       </form>

@@ -188,16 +188,17 @@ router.post("/cooking-service", (req, res, next) => {
   
   const foodType = req.body.foodType;
   const foodPreference = req.body.foodPreference
-  const mealType = req.body.mealType;
+  //const mealType = req.body.mealType;
   const serviceType = req.body.serviceType;
 
   Maid.find({
     speciality: foodType,
     foodPractice: foodPreference,
-    'listsOfDishs.type': mealType,
+    //'listsOfDishs.type': mealType,
     services: serviceType,
   })
     .then(maidsList => {
+      console.log('maidsList', maidsList)
       res.status(201).json(maidsList);
     })
     .catch(err => {
@@ -205,19 +206,6 @@ router.post("/cooking-service", (req, res, next) => {
         .status(500)
         .json({ message: "Something went wrong during maids request", err });
     });
-});
-
-
-router.post('/upload', uploader.single("imageProfil"), (req, res, next) => {
-    // console.log('file is: ', req.file)
-
-    if (!req.file) {
-      next(new Error('No file uploaded!'));
-      return;
-    }
-    // get secure_url from the file object and save it in the 
-    // variable 'secure_url', but this can be any name, just make sure you remember to use the same in frontend
-    res.json({ secure_url: req.file.secure_url });
 });
 
 router.get('/maid-profil/:id', (req, res, next) => {

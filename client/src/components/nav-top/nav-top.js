@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 
 import IconArrow from "../icons/icon-arrow";
 import "./nav-top.scss";
 
-const NavTop = ({ user, currentPageName, history }) => {
+const NavTop = ({ currentPageName, history }) => {
   const [isVisible, setIsVisible] = useState(true);
   const urlLocation = history.location.pathname;
 

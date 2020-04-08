@@ -51,16 +51,17 @@ const FormCookingService = ({ history, updateMaid, selectedService, user, curren
 
     //je vais rechercher les maids qui correspondent à ma recherche
     maidService
-      .getSpecificMaid(foodType, foodPreference, mealType, serviceType)
+      .getSpecificMaid(foodType, foodPreference, /*mealType,*/ serviceType)
       .then(data => {
         const preferencesUser = {
           foodType,
           foodPreference,
-          mealType,
+          //mealType,
           serviceType,
           numberOfClient,
           selectedDate
         };
+        
         setMaids(data);
         updateMaid(data);
         selectedService(preferencesUser);

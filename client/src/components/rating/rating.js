@@ -9,7 +9,7 @@ const Rating = ({stars}) => {
     return (
         <ul className="rating">
             {[...Array(ratedStars)].map((el, i) => 
-                    <li className={(i < stars) ? 'full': 'empty'}><FontAwesomeIcon icon={faLemon} /></li>
+                    <li className={(i < stars) ? 'full': 'empty'}><FontAwesomeIcon icon={faLemon} key={i} /></li>
                     
                 
             )} 

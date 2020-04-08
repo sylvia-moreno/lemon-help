@@ -7,8 +7,10 @@ import { faLemon } from "@fortawesome/free-solid-svg-icons";
 import "./card-profil.scss";
 
 const CardProfil = props => {
+  
   const handleSubmit = event => {
     event.preventDefault();
+    
     props.selectedMaid(props.maid);
     
     props.history.push("/booking-confirmation");
@@ -25,13 +27,6 @@ const CardProfil = props => {
           <div className="block">
             <div className="container">
               <p className="container-name">{props.maid.username}</p>
-              {/*} <p className="container-service">
-                {props.maid.services.map((service, i) => (
-                  <span className="container-service" key={i}>
-                    {service}{" "}
-                  </span>
-                ))}
-                </p>*/}
               <p className="container-service">{props.maid.profession}</p>
             </div>
             <div className="container">

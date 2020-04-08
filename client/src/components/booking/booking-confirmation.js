@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { isEmpty } from "lodash";
 
 import serviceCooking from "../../services/booking";
 import BookingPaymentItem from "./booking-payment-item";
@@ -17,6 +18,7 @@ const BookingConfirmation = props => {
   const [hasChecked, setHasChecked] = useState(false);
   const [methodPaymentSelected, setMethodPaymentSelected] = useState("");
   const [account, setAccount] = useState();
+  const [isError, setIsError] = useState("");
 
   useEffect(() => {
     const priceService =
@@ -30,6 +32,13 @@ const BookingConfirmation = props => {
     props.currentPageName("Confirmation & Paiement");
   }, []);
 
+  useEffect(() => {
+    const mea = document.getElementById("mea-error");
+    if (!!mea) {
+      mea.scrollIntoView();
+    }
+  }, [isError]);
+
   const {
     foodType,
     foodPreference,
@@ -39,7 +48,7 @@ const BookingConfirmation = props => {
     selectedDate
   } = props.selectedService;
   const { username, rate } = props.selectedMaid;
-  
+
   const COOKING = serviceType === "cuisine";
   const CLEANING = serviceType === "ménage";
   const BABYSITTING = serviceType === "babysitting";
@@ -63,12 +72,21 @@ const BookingConfirmation = props => {
     }
   ];
 
+  const goBack = () => {
+    props.history.goBack();
+  };
+
   const handleCheckMethodPayment = methodPayment => {
     setMethodPaymentSelected(methodPayment);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    if (!methodPaymentSelected) {
+      return setIsError(true);
+    }
+
     if (COOKING) {
       serviceCooking
         .bookingCookingService(
@@ -92,9 +110,15 @@ const BookingConfirmation = props => {
 
   return (
     <form className="booking-confirmation wrapper" onSubmit={handleSubmit}>
-      {props.selectedMaid !== undefined ? (
+      {!isEmpty(props.selectedMaid) ? (
         <>
           <div className="booking-confirmation--recap">
+            {isError && (
+              <div id="mea-error">
+                <p>Veuillez choisir un moyen de paiement</p>
+              </div>
+            )}
+
             <div className="header">
               <p className="service-name">{serviceType}</p>
               <div className="service-date">
@@ -122,7 +146,9 @@ const BookingConfirmation = props => {
                     </p>
                   </>
                 ) : (
-                  <div>ddd</div>
+                  <>
+                    <p>ddd</p>
+                  </>
                 )}
               </p>
             </div>
@@ -180,14 +206,11 @@ const BookingConfirmation = props => {
         </>
       ) : (
         <div className="alignCenter">
+          <p>Ooops... Veuillez effectuez une réservation </p>
           <p>
-            Ooops... Pas si vite, il faut chercher avant de trouver le bon{" "}
-            <FontAwesomeIcon icon={faLemon} />
-          </p>
-          <p className="alignCenter">
-            <a href="/" className="btn-cta">
-              Choisir un service
-            </a>
+            <button onClick={goBack} className="btn-cta">
+              Recherche un service
+            </button>
           </p>
         </div>
       )}

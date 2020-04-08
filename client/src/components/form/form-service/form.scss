@@ -89,8 +89,13 @@
       transition: background 0.25s linear;
     }
   }
-
   
+}
+
+.form-cooking {
+  .alignCenter {
+    margin-bottom: 50px !important;
+  }
 }
 
 .MuiFormLabel-root.MuiInputLabel-root {

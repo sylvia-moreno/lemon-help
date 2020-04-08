@@ -4,6 +4,8 @@ import "./App.scss";
 import { Switch, Route } from "react-router-dom";
 
 import NavTop from "./components/nav-top/nav-top";
+import NavBar from "./components/nav-bar/nav-bar";
+
 import Homepage from "./components/auth/Homepage.js";
 import Signup from "./components/auth/Signup.js";
 import SignupMaid from "./components/auth/SignupMaid.js";
@@ -17,6 +19,7 @@ import FormCookingService from "./components/form/form-service/form-cooking-serv
 
 import Booking from "./components/booking/booking";
 import BookingConfirmation from "./components/booking/booking-confirmation";
+import BookingList from "./components/booking/booking-list";
 
 import Payment from "./components/payment/payment";
 import PaymentSucess from "./components/payment-success/payment-success";
@@ -35,13 +38,12 @@ class App extends Component {
   };
 
   fetchUser = () => {
-    
     if (!this.state.user._id) {
-      
       authService
         .loggedin()
         .then(data => {
-          this.setState({ user: data.user })})
+          this.setState({ user: data.user });
+        })
         .catch(err => this.setState({ user: false }));
     } else {
       console.log("user already in the state");
@@ -83,6 +85,7 @@ class App extends Component {
   };
 
   updateSelectedMaid = data => {
+    
     this.setState({ selectedMaid: data });
   };
 
@@ -104,10 +107,12 @@ class App extends Component {
             {" "}
             {/* data-route="/" allow us to style pages */}
             <NavTop
-              user={this.state.user}
               currentPageName={this.state.currentPageName}
               history={props.history}
             />
+            <NavBar
+                history={props.history}
+              />
             <Switch>
               <Route
                 exact
@@ -225,23 +230,24 @@ class App extends Component {
                 )}
               />
 
-              {/*<Route
-                exact
-                path="/payment"
-                render={props => (
-                  <Payment
-                    history={props.history}
-                    selectedService={this.state.selectedService}
-                    selectedMaid={this.state.selectedMaid}
-                    user={this.state.user}
-                  />
-                )}
-                />*/}
-
               <Route
                 exact
                 path="/payment-success"
                 render={props => <PaymentSucess />}
+              />
+
+              <Route
+                exact
+                path="/booking-list"
+                render={props => (
+                  <BookingList
+                    history={props.history}
+                    selectedService={this.state.selectedService}
+                    selectedMaid={this.state.selectedMaid}
+                    user={this.state.user}
+                    currentPageName={this.getCurrentPageName}
+                  />
+                )}
               />
 
               {/* last route, ie: 404 */}
@@ -249,7 +255,7 @@ class App extends Component {
             </Switch>
             {/*
           <LandingPage />
-          <RatedProfil />
+          
 
           <ListServiceItem serviceValue={'CLEANING'} serviceName={'Nettoyer'} />
           */}

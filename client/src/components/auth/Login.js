@@ -48,7 +48,7 @@ export default class extends React.Component {
         </div>
         <div className="login-form">
           {this.state.error && (
-            <div className="mea-error">
+            <div id="mea-error">
               <p>{this.state.error}</p>
             </div>
           )}

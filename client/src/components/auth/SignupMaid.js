@@ -99,11 +99,9 @@ export default class extends React.Component {
   handleFileChange = event => {
     const uploadData = new FormData();
     uploadData.append("imageProfil", event.target.files[0]);
-    ;
     uploadFileService
       .handleUploadFile(uploadData)
       .then(response => {
-        ;
         //this.props.updateMaid(response);
         this.setState({ imageProfil: response.secure_url });
         //this.props.history.push("/profile");
@@ -127,12 +125,12 @@ export default class extends React.Component {
         </div>
         <div className="login-form">
           {this.state.error && (
-            <div className="mea-error">
+            <div id="mea-error">
               <p>{this.state.error}</p>
             </div>
           )}
 
-          <h2>Identification LemonMaider</h2>
+          <h2>Création de compte LemonMaider</h2>
           <p>
             <label>
               <input
@@ -229,7 +227,7 @@ export default class extends React.Component {
               />
             </label>
           </p>
-
+          {/* 
           <p>
             <label>
               <input
@@ -239,6 +237,7 @@ export default class extends React.Component {
               />
             </label>
           </p>
+          */}
 
           <p>
             <label>

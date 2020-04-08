@@ -68,4 +68,29 @@
       }
     }
   }
+
+  &-list {
+    &--item {
+      margin-bottom: 30px;
+
+      .title {
+        color: rgb(155, 155, 155);
+      }
+    }
+  }
+
+}
+
+.booking-list {
+  .card-profil--info {
+    padding: 12px 12px 0 !important;
+  }
+  .status--pending {
+    cursor: not-allowed;
+    pointer-events: none;
+    &:hover {
+      border: 1px solid #ccc;
+      color: #5b5b5b;
+    }
+  }
 }

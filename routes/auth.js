@@ -93,7 +93,6 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/loggedin", (req, res, next) => {
-  console.log('user loggedin', req.user)
   if (req.user) {
     res.status(200).json({ user: req.user});
     return;

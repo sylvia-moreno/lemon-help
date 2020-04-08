@@ -58,6 +58,17 @@
         color: #9c9b9b;
       }
 
+      &-status {
+        font-size: 12px;
+        margin-top: 10px !important;
+        &--pending {
+          color: #fd6464;
+        }
+        &--done {
+          color: #27aa3d;
+        }
+      }
+
       &-cta {
         display: flex;
         flex-direction: column;

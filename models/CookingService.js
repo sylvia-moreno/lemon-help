@@ -14,7 +14,7 @@ const cookingServiceSchema = new Schema({
   },
   foodPreference: String,
   numberOfClient: String,
-  maid: { type: Schema.Types.ObjectId, ref: "Maid" }, 
+  maid: Object, //{ type: Schema.Types.ObjectId, ref: "Maid" }, 
   client: { type: Schema.Types.ObjectId, ref: "User" }, 
   status: {
     type: String,

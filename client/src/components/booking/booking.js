@@ -21,16 +21,16 @@ const Booking = (props) => {
       </h2>
       <div className="booking-content">
         {props.maids.length > 0 ? (
-          props.maids.map((maid, i) => <CardProfil maid={maid} service={props.selectedService.serviceType} selectedMaid={props.selectedMaid} history={props.history} />)
+          props.maids.map((maid, i) => <CardProfil maid={maid} service={props.selectedService.serviceType} selectedMaid={props.selectedMaid} history={props.history} key={i} />)
         ) : (
-          <>
+          <div className="alignCenter">
             <p>Nous n'avons pas encore trouvés cette perle rare ... </p>
             <p>
               <button onClick={goBack} className="btn-cta">
                 Recherche un service
               </button>
             </p>
-          </>
+          </div>
         )}
       </div>
     </div>

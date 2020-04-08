@@ -16,9 +16,8 @@ export default {
     selectedMaid,
     userID,
     status,
-    methodPaymentSelected,
+    methodPaymentSelected
   ) {
-    ;
     return this.service
       .post("/booking-confirmation", {
         foodType,
@@ -30,7 +29,15 @@ export default {
         selectedMaid,
         userID,
         status,
-        methodPaymentSelected,
+        methodPaymentSelected
+      })
+      .then(response => response.data);
+  },
+
+  getBookingList(userData) {
+    return this.service
+      .get("/booking-list", {
+        userData
       })
       .then(response => response.data);
   }
