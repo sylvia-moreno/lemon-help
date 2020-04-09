@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import serviceCooking from "../../services/booking";
 
-const Payment = props => {
-  ;
+const Payment = (props) => {
   const [account, setAccount] = useState();
 
   useEffect(() => {
+    //le tarif maid * numb client
     const priceService =
       props.serviceType === "cuisine" ? props.selectedMaid.rate : 0;
     const price = priceService * props.selectedService.numberOfClient;

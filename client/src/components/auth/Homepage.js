@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { isEmpty } from "lodash";
 
 import maidService from "../../services/maids";
@@ -83,12 +83,14 @@ const Homepage = ({ user, history }) => {
                     i < 3 &&
                     !!maid.rating &&
                     !!maid.imageProfil && (
-                      <RatedProfil
-                        stars={maid.rating}
-                        img={maid.imageProfil}
-                        name={maid.username}
-                        key={i}
-                      />
+                      <Link to={`/profil-maid/${maid._id}`}>
+                        <RatedProfil
+                          stars={maid.rating}
+                          img={maid.imageProfil}
+                          name={maid.username}
+                          key={i}
+                        />
+                      </Link>
                     )
                 )}
               </div>

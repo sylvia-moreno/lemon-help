@@ -11,6 +11,7 @@ const NavTop = ({ currentPageName, history }) => {
 
   useEffect(() => {
     const urlAuthorized = [
+      "/profil-maid/",
       "/cooking-service",
       "/booking",
       "/booking-confirmation",

@@ -129,6 +129,12 @@ export default {
       .then(response => response.data);
   },
 
+  getProfil(maidID) {
+    return this.service
+      .get(`/profil-maid/${maidID}`)
+      .then(response => response.data);
+  },
+
   logout() {
     return this.service.get('/logout', {})
       .then(response => response.data)

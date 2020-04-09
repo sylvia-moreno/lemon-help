@@ -21,7 +21,7 @@ const Booking = (props) => {
       </h2>
       <div className="booking-content">
         {props.maids.length > 0 ? (
-          props.maids.map((maid, i) => <CardProfil maid={maid} service={props.selectedService.serviceType} selectedMaid={props.selectedMaid} history={props.history} key={i} />)
+          props.maids.map((maid, i) => <CardProfil maid={maid} service={props.selectedService.serviceType} selectedMaid={props.selectedMaid} history={props.history} key={i} match={props.match}/>)
         ) : (
           <div className="alignCenter">
             <p>Nous n'avons pas encore trouvés cette perle rare ... </p>

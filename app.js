@@ -46,12 +46,14 @@ app.use(session({
 require('./passport')(app);
 
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 const maidsRoutes = require('./routes/maids');
 const bookingRoutes = require('./routes/booking');
 const fileUploadRoutes = require('./routes/file-upload');
 //const landingRoutes = require('./routes/landing-page');
 
 app.use('/auth', authRoutes);
+app.use('/profil', userRoutes);
 app.use('/maids', maidsRoutes);
 app.use('/booking', bookingRoutes);
 app.use('/upload-file', fileUploadRoutes);

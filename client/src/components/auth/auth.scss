@@ -77,8 +77,11 @@
       -moz-appearance: none;
       appearance: none;
       position: relative;
-      background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-      background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+      background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%),
+        linear-gradient(to right, #ccc, #ccc);
+      background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
       background-size: 5px 5px, 5px 5px, 1px 1.5em;
       background-repeat: no-repeat;
     }
@@ -134,5 +137,57 @@
   .profils {
     display: flex;
     justify-content: space-between;
+    a {
+      text-decoration: none;
+      color: #000;
+      &:hover {
+        .rated-profil {
+          border: 1px solid #fcc434;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+.profile {
+  &-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .card-profil {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--info {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .block {
+    width: 100%;
+  }
+  .desc {
+    padding: 0;
+    list-style: none;
+    li {
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #cccccc63;
+      padding: 10px 0;
+      &:last-child {
+        border-bottom: none;
+      }
+      .label {
+        font-weight: bold;
+      }
+    }
   }
 }

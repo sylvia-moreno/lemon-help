@@ -29,6 +29,10 @@ import maidService from "./services/maids";
 import NotFound from "./components/not-found/not-found";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+  }
   state = {
     user: {},
     maids: [], //liste des maids quand un user est loggué
@@ -163,24 +167,13 @@ class App extends Component {
 
               <Route
                 exact
-                path="/profile"
-                render={props => (
-                  <Profile
-                    user={this.state.user}
-                    updateUser={this.updateUser}
-                    history={props.history}
-                  />
-                )}
-              />
-
-              <Route
-                exact
-                path="/maid-profil/:id"
+                path="/profil-maid/:id"
                 render={props => (
                   <ProfileMaid
                     maids={this.state.maids}
                     updateMaid={this.updateMaid}
                     history={props.history}
+                    match={props.match}
                     currentPageName={this.getCurrentPageName}
                   />
                 )}
@@ -206,6 +199,7 @@ class App extends Component {
                 render={props => (
                   <Booking
                     history={props.history}
+                    match={props.match}
                     maids={this.state.maids}
                     selectedService={this.state.selectedService}
                     selectedMaid={this.updateSelectedMaid}

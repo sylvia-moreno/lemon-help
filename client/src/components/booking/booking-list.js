@@ -70,6 +70,24 @@ const BookingList = ({
                         ? "En attente de validation"
                         : "Réalisée"}
                     </p>
+                    <div className="details-service">
+                      {!!service.foodType && (
+                        <p>
+                          Type de cuisine: <span>{service.foodType}</span>
+                        </p>
+                      )}
+                      {!!service.foodPreference && (
+                        <p>
+                          Régime alimentaire:{" "}
+                          <span>{service.foodPreference}</span>
+                        </p>
+                      )}
+                      {!!service.mealType && (
+                        <p>
+                          Pour: <span>{service.mealType}</span>
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="block">

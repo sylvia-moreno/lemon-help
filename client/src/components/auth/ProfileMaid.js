@@ -1,36 +1,84 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLemon } from "@fortawesome/free-solid-svg-icons";
 
 import maidService from "../../services/maids";
+import "../card-profil/card-profil.scss";
 
-const ProfileMaid = (props) => {
- 
+import { set } from "date-fns/esm";
+
+const ProfileMaid = props => {
+  const [maid, setMaid] = useState({});
+
   useEffect(() => {
-    props.currentPageName("Profile");
+    maidService.getProfil(props.match.params.id).then(response => {});
   }, []);
 
-  const getProject = (id) => {
-    return props.maids.find(project => project.id === id)
-  };
+  useEffect(() => {
+    props.currentPageName("Profile LemonMaider");
+  }, []);
 
-  const maid = getProject(props.match.params.id);
+  useEffect(() => {
+    const getMaid = id => {
+      return props.maids.find(maid => maid._id === id);
+    };
+    const maid = getMaid(props.match.params.id);
 
-
-  const logout = event => {
-    maidService.logout().then(response => {
-      this.props.updateMaid(false);
-    });
-  };
+    setMaid(maid);
+  });
 
   return (
     <div className="profile wrapper">
-      Nom: {maid.username}
+      <h2 className="profile-title">Le profil de {maid.username}</h2>
+      <div className="card-profil">
+        <div className="card-profil--img">
+          <span className="card-profil--img-container">
+            <img src={maid.imageProfil} alt="img profil" />
+          </span>
+        </div>
+        <div className="card-profil--info">
+          <div className="block">
+            <div className="container">
+              <p className="container-service">{maid.profession}</p>
+            </div>
+            <div className="container">
+              <ul className="desc">
+                {!!maid.profession && (
+                  <li>
+                    <span className="label">Profession</span>
+                    <span className="def">{maid.profession}</span>
+                  </li>
+                )}
+                {!!maid.experience && (
+                  <li>
+                    <span className="label">Expérience</span>
+                    <span className="def">{maid.experience}</span>
+                  </li>
+                )}
+                {!!maid.rating && (
+                  <li className="rating">
+                    <span className="label">Rating</span>
+                    <span className="def">
+                      <div className="rating">
+                        <span className="rating-number">{maid.rating}</span>
+                        <FontAwesomeIcon icon={faLemon} />
+                      </div>
+                    </span>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 };
 
 export default ProfileMaid;
-{/* 
+{
+  /* 
 export default class extends React.Component {
   
 
@@ -100,4 +148,5 @@ export default class extends React.Component {
     );
   }
 }
-*/}
+*/
+}

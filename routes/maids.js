@@ -208,7 +208,8 @@ router.post("/cooking-service", (req, res, next) => {
     });
 });
 
-router.get('/maid-profil/:id', (req, res, next) => {
+router.get('/profil-maid/:id', (req, res, next) => {
+  console.log('maid req', req.maid)
   res.status(200).json({ maid: req.maid });
 })
 

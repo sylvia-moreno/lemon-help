@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import maidService from "../../services/maids";
+ 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLemon } from "@fortawesome/free-solid-svg-icons";
 
 import "./card-profil.scss";
 
 const CardProfil = props => {
+  const [maid, setMaid] = useState({});
+
+  useEffect(() => {
+    maidService.getProfil(props.match.params.id).then(response => {});
+  }, []);
+
   
   const handleSubmit = event => {
     event.preventDefault();
-    
     props.selectedMaid(props.maid);
-    
     props.history.push("/booking-confirmation");
   };
   return (
@@ -39,12 +45,13 @@ const CardProfil = props => {
           </div>
           <div className="block">
             <div className="container-cta">
-              <Link
-                to={`/maid-profil/${props.maid.id}`}
+              {/*<Link
+                to={`/profil-maid/${props.maid.id}`}
                 className="bta-link--NoBg container-show-profil"
+                disabled
               >
                 Voir son profil
-              </Link>
+              </Link>*/}
               <button
                 className="bta-link--Bg container-selected"
                 onClick={handleSubmit}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { isEmpty } from "lodash";
 
+import {getMinutes, getHours} from "date-fns";
+
 import serviceCooking from "../../services/booking";
 import BookingPaymentItem from "./booking-payment-item";
 
@@ -21,11 +23,14 @@ const BookingConfirmation = props => {
   const [isError, setIsError] = useState("");
 
   useEffect(() => {
+    const nbClient = props.selectedService.numberOfClient;
+    const maidRate = !!props.selectedMaid.rate
+      ? parseInt(props.selectedMaid.rate)
+      : 10;
     const priceService =
-      props.serviceType === "cuisine" ? props.selectedMaid.rate : 0;
+      props.serviceType === "cuisine" ? (nbClient * maidRate) : 10;
     const price = priceService * props.selectedService.numberOfClient;
-    const pourcent = (price * 10) / 100;
-    setAccount(price + pourcent);
+    setAccount(price);
   }, []);
 
   useEffect(() => {
@@ -124,7 +129,7 @@ const BookingConfirmation = props => {
               <div className="service-date">
                 {!!selectedDate && (
                   <>
-                    <p>{selectedDate.toLocaleTimeString()}</p>
+                    <p>{getHours(selectedDate)}:{getMinutes(selectedDate)}</p>
                     <p>{selectedDate.toLocaleDateString()}</p>
                   </>
                 )}
@@ -189,7 +194,7 @@ const BookingConfirmation = props => {
             <ul className="booking-confirmation--total-list">
               <li className="item">
                 <span className="label">Total</span>
-                <span>{account}</span>
+                <span>{account} €</span>
               </li>
               <li className="item">
                 <span className="label">Frais de déplacement</span>

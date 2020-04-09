@@ -9,7 +9,6 @@ import IconProfile from "../icons/icon-profile";
 import "./nav-bar.scss";
 
 const NavBar = ({ history }) => {
-  debugger;
   const [isVisible, setIsVisible] = useState(true);
   const [isActiveHome, setIsActiveHome] = useState(false);
   const [isActiveBooking, setIsActiveBooking] = useState(false);
@@ -21,7 +20,6 @@ const NavBar = ({ history }) => {
     const urlAuthorized = [
       "/",
       "/cooking-service",
-      "/booking",
       "/booking-list",
       "/profil"
     ];
@@ -87,7 +85,7 @@ const NavBar = ({ history }) => {
               "nav-bar--item--isSelected": isActiveProfil
             })}
           >
-            <Link to="/profil">
+            <Link to="/profil/:id">
               <IconProfile />
               Profil
             </Link>
