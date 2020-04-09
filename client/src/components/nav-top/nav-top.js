@@ -10,15 +10,13 @@ const NavTop = ({ currentPageName, history }) => {
   const urlLocation = history.location.pathname;
 
   useEffect(() => {
-    const urlNotAuthorized = [
-      "/",
-      "/login",
-      "/login-maid",
-      "/signup",
-      "/signup-maid",
-      "/payment-success"
+    const urlAuthorized = [
+      "/cooking-service",
+      "/booking",
+      "/booking-confirmation",
+      "/booking-list",
     ];
-    return urlNotAuthorized.includes(urlLocation) ? setIsVisible(false) : setIsVisible(true);
+    return urlAuthorized.includes(urlLocation) ? setIsVisible(true) : setIsVisible(false);
   }, [urlLocation]);
 
   const goBack = () => {

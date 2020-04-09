@@ -26,6 +26,7 @@ import PaymentSucess from "./components/payment-success/payment-success";
 
 import authService from "./components/auth/auth-service.js";
 import maidService from "./services/maids";
+import NotFound from "./components/not-found/not-found";
 
 class App extends Component {
   state = {
@@ -85,7 +86,6 @@ class App extends Component {
   };
 
   updateSelectedMaid = data => {
-    
     this.setState({ selectedMaid: data });
   };
 
@@ -110,9 +110,7 @@ class App extends Component {
               currentPageName={this.state.currentPageName}
               history={props.history}
             />
-            <NavBar
-                history={props.history}
-              />
+            <NavBar history={props.history} />
             <Switch>
               <Route
                 exact
@@ -251,7 +249,14 @@ class App extends Component {
               />
 
               {/* last route, ie: 404 */}
-              <Route render={() => <h1>Not Found</h1>} />
+              <Route
+                render={() => (
+                  <NotFound
+                    history={props.history}
+                    currentPageName={this.getCurrentPageName}
+                  />
+                )}
+              />
             </Switch>
             {/*
           <LandingPage />

@@ -11,46 +11,82 @@ import "./nav-bar.scss";
 const NavBar = ({ history }) => {
   debugger;
   const [isVisible, setIsVisible] = useState(true);
+  const [isActiveHome, setIsActiveHome] = useState(false);
+  const [isActiveBooking, setIsActiveBooking] = useState(false);
+  const [isActiveProfil, setIsActiveProfil] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const urlLocation = history.location.pathname;
 
   useEffect(() => {
-    const urlNotAuthorized = [
-      "/login",
-      "/login-maid",
-      "/signup",
-      "/signup-maid",
-      "/booking-confirmation",
-      "/payment-success"
+    const urlAuthorized = [
+      "/",
+      "/cooking-service",
+      "/booking",
+      "/booking-list",
+      "/profil"
     ];
-    return urlNotAuthorized.includes(urlLocation)
-      ? setIsVisible(false)
-      : setIsVisible(true);
+    return urlAuthorized.includes(urlLocation)
+      ? setIsVisible(true)
+      : setIsVisible(false);
   }, [urlLocation]);
 
   useEffect(() => {
-    const urls = ["/", "/booking-list", "/profil"];
-    return urls.includes(urlLocation) ? setIsActive(true) : setIsActive(false)
-    
+    const urlHome = "/";
+    const urlBookingList = "/booking-list";
+    const urlProfil = "/profil";
+
+    switch (urlLocation) {
+      case urlHome:
+        setIsActiveHome(true);
+        setIsActiveBooking(false);
+        setIsActiveProfil(false);
+        break;
+      case urlBookingList:
+        setIsActiveBooking(true);
+        setIsActiveHome(false);
+        setIsActiveProfil(false);
+        break;
+      case urlProfil:
+        setIsActiveProfil(true);
+        setIsActiveBooking(false);
+        setIsActiveHome(false);
+        break;
+      default:
+        console.log("");
+    }
   }, [urlLocation]);
 
   return (
     isVisible && (
-      <div className="nav-bar">
+      <div
+        className={classNames("nav-bar", { "nav-bar--notVisible": !isVisible })}
+      >
         <ul className="nav-bar--list">
-          <li className={classNames("nav-bar--item", {"nav-bar--item--isSelected": isActive})}>
+          <li
+            className={classNames("nav-bar--item", {
+              "nav-bar--item--isSelected": isActiveHome
+            })}
+          >
             <Link to="/">
               <IconHome />
               Accueil
             </Link>
           </li>
-          <li className={classNames("nav-bar--item", {"nav-bar--item--isSelected": isActive})}>
+          <li
+            className={classNames("nav-bar--item", {
+              "nav-bar--item--isSelected": isActiveBooking
+            })}
+          >
             <Link to="/booking-list">
               <IconBooking />
               Réservations
             </Link>
           </li>
-          <li className={classNames("nav-bar--item", {"nav-bar--item--isSelected": isActive})}>
+          <li
+            className={classNames("nav-bar--item", {
+              "nav-bar--item--isSelected": isActiveProfil
+            })}
+          >
             <Link to="/profil">
               <IconProfile />
               Profil
